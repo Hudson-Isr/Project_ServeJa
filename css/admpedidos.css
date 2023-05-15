@@ -1,0 +1,238 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500&display=swap");
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: "Roboto", sans-serif;
+}
+body {
+  font-weight: 400;
+  background-image: linear-gradient(to bottom, #b40303, #590202);
+}
+
+header {
+  background-color: white;
+}
+header ul {
+  display: flex;
+  align-items: center;
+  list-style-type: none;
+  justify-content: space-around;
+  height: 80px;
+}
+header ul li a {
+  text-decoration: none;
+  color: #590202;
+  font-weight: 500;
+}
+header a:hover {
+  color: #f28705;
+}
+
+.pesquisa input {
+  padding: 10px 40px;
+  padding-right: 0.9rem;
+  font-size: 1rem;
+  background-image: linear-gradient(to bottom, #b40303, #590202);
+  border-radius: 10px;
+  border: none;
+}
+.pesquisa input:hover {
+  border: none;
+  color: white;
+}
+input::placeholder {
+  color: white;
+  font-weight: lighter;
+  font-family: "Poppins", sans-serif;
+}
+.pesquisa button {
+  background-image: linear-gradient(to bottom, #ffa436, #ff6600);
+  color: white;
+  padding: 12px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+}
+.pesquisa button:hover {
+  background-image: linear-gradient(to bottom, #b40303, #590202);
+  color: white;
+}
+
+.container {
+  padding-left: 8rem;
+  padding-right: 8rem;
+  padding-top: 5rem;
+  text-align: left;
+}
+
+.status {
+  display: flex;
+  flex-direction: column;
+}
+
+.box {
+  margin-bottom: 3.5rem;
+}
+
+.box p {
+  padding-bottom: 0.5rem;
+  color: white;
+  font-size: 1.15rem;
+}
+
+.box ul {
+  display: flex;
+  justify-content: space-between;
+  padding: 1.2rem;
+  background-color: white;
+  list-style-type: none;
+  border-radius: 10px;
+}
+
+.box ul li {
+  padding: 0 3rem;
+}
+.box ul li a {
+  text-decoration: none;
+  color: #590202;
+  font-weight: 500;
+}
+.box a:hover {
+  color: #f28705;
+}
+
+.primeiro {
+  border: 3px solid #f28705;
+  background-color: #f28705;
+  color: white;
+  padding: 0.5rem 0.8rem;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.segundo {
+  border: 3px solid #cf1010;
+  background-color: #cf1010;
+  color: white;
+  padding: 0.5rem 0.8rem;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.terceiro {
+  border: 3px solid #ffd600;
+  background-color: #ffd600;
+  color: white;
+  padding: 0.5rem 0.8rem;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.quarto {
+  border: 3px solid #008500;
+  background-color: #008500;
+  color: white;
+  padding: 0.5rem 0.8rem;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.grid-container {
+  display: grid;
+  grid-template-columns: 250px 250px 250px 250px;
+  gap: 2.11rem;
+  width: 15rem;
+}
+
+.pedido {
+  background-color: #f28705;
+  color: white;
+  margin-top: 0.3rem;
+  margin-bottom: 0.3rem;
+  font-size: 0.9rem;
+  border-radius: 5px;
+  width: 54%;
+  padding-left: 0.3rem;
+}
+
+.dados {
+  background-color: white;
+  border-radius: 10px;
+  padding: 20px;
+}
+
+.dados p {
+  margin: 0.5rem;
+}
+
+.dados input {
+  background-color: #f28705;
+  width: 100%;
+  color: white;
+  border: none;
+  padding: 9px;
+  border-radius: 5px;
+  transition: 0.3s;
+}
+
+.dados input:hover {
+  cursor: pointer;
+  color: white;
+  background-color: #590202;
+  transition: 0.3s;
+}
+.float-end {
+  margin-left: 20px;
+}
+.btn-ver-mais {
+  background-color: #f28705;
+  color: white;
+  border: none;
+  padding: 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  width: 100%;
+}
+
+.btn-ver-mais:focus .menubar {
+  display: block;
+}
+
+.menubar {
+  display: none;
+  background-color: #f9f9f9;
+  color: #590202;
+  padding: 10px;
+  list-style: none;
+  border-radius: 5px;
+  margin-top: 10px;
+}
+
+.menubar li {
+  padding: 5px 0;
+  cursor: pointer;
+}
+
+.menubar li:hover {
+  background-color: #ddd;
+}
+.menubar a {
+  color: #590202;
+}
+footer {
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: white;
+}
+footer a {
+  text-decoration: none;
+  color: #f28705;
+}
+footer a:hover {
+  text-decoration: none;
+  color: white;
+}

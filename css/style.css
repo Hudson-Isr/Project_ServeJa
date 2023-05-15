@@ -1,0 +1,286 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins");
+
+* {
+  margin: 0;
+  padding: 0;
+}
+@media only screen and (min-width: 970px){
+  body{
+    font-family: 'Poppins', sans-serif;
+    background-image: url(../imagens/blurry-gradient-haikei.svg) ;
+    background-repeat: no-repeat;
+    background-size: cover;
+    display: flex;
+    background-position: center center;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+  }
+  .conteiner{
+    padding: 20px;
+    display: flex;  
+    max-width: 960px;
+    border-radius: 30px;
+    border-radius: 50px;
+    backdrop-filter: blur(16px) saturate(180%);
+    -webkit-backdrop-filter: blur(16px) saturate(180%);
+    background-color: rgba(255, 255, 255, 0.75);
+    border-radius: 12px;
+    border: 1px solid rgba(209, 213, 219, 0.3);
+  }
+  .logo-page img{
+    border-radius: 30px;
+    width: 90%;
+  }
+  .left-row{
+    display: flex;
+    flex-direction: column;
+    width: 425px; 
+    justify-content: center; 
+  }
+  h2{
+    font-size: 30px;
+  }
+  .emp{
+    color: #ff0000;
+  }
+  form{
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+  }
+  input{
+    background-color: #eee;
+    border-radius: 10px;
+    border: none;
+    padding: 10px 13px;
+    margin: 8px 0;
+  }
+  label{
+    margin: 10px 0;
+  }
+  .form-group{
+    margin: 30px;
+  }
+  button{
+    border-radius: 20px;
+    border: 1px solid #f28705;
+    background-color: #f28705;
+    color: #FFFFFF;
+    font-size: 15px;
+    font-weight: 700;
+    margin: 10px;
+    padding: 12px 80px;
+    letter-spacing: 1px;
+    text-transform: capitalize;
+    transition: 0.3s ease-in-out;
+  }
+  button:hover{
+    letter-spacing: 3px;
+  }
+  button:active{
+    transform: scale(0.95);
+  }
+  button:focus{
+    outline: none;
+  }
+  .Cadastrar-se{
+    margin: 30px 0;
+    width: 100%;
+    text-align: center;
+  }
+  .Cadastrar-se a{
+    color: #ff0000;
+    text-decoration: none;
+    font-weight: 700;
+  }
+  a:hover{
+    font-weight: 300;
+    color: #ff0000;
+    border-radius: 20px;
+    font-weight: 700;
+    background-color: #FFFFFF;
+    padding: 12px 35px;
+  }
+}
+@media only screen and (min-width: 762px) and (max-width: 971px){
+  body{
+    font-family: 'Poppins', sans-serif;
+    background-image: url(../imagens/blurry-gradient-haikei.svg) ;
+    background-repeat: no-repeat;
+    background-size: cover;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+  }
+  .conteiner{
+    padding: 20px;
+    display: flex;  
+    max-width: 720px;
+    border-radius: 30px;
+    border-radius: 50px;
+    backdrop-filter: blur(16px) saturate(180%);
+    -webkit-backdrop-filter: blur(16px) saturate(180%);
+    background-color: rgba(255, 255, 255, 0.75);
+    border-radius: 12px;
+    border: 1px solid rgba(209, 213, 219, 0.3);
+  }
+  .logo-page img{
+    border-radius: 30px;
+    width: 90%;
+    height: 100%;
+  }
+  h2{
+    font-size: 30px;
+  }
+  .left-row{
+    display: flex;
+    flex-direction: column;
+    width: 425px; 
+    justify-content: center; 
+  }
+  .emp{
+    color: #ff0000;
+  }
+  .inputs{
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+  }
+  input{
+    background-color: #eee;
+    border-radius: 10px;
+    border: none;
+    padding: 10px 13px;
+    margin: 8px 0;
+  }
+  label{
+    margin: 10px 0;
+  }
+  .checkbox{
+    margin: 20px 0;
+  }
+  button{
+    margin: 10px;
+    border-radius: 20px;
+    border: 1px solid #f28705;
+    background-color: #f28705;
+    color: #FFFFFF;
+    font-size: 15px;
+    font-weight: 700;
+    margin: 10px;
+    padding: 12px 80px;
+    letter-spacing: 1px;
+    text-transform: capitalize;
+    transition: 0.3s ease-in-out;
+  }
+  button:hover{
+    letter-spacing: 3px;
+  }
+  button:active{
+    transform: scale(0.95);
+  }
+  button:focus{
+    outline: none;
+  }
+  .Cadastrar-se{
+    margin: 30px 0;
+    width: 100%;
+    text-align: center;
+  }
+  .Cadastrar-se a{
+    font-size: 14px;
+    color: #ff0000;
+    text-decoration: none;
+    font-weight: 700;
+  }
+
+}
+
+@media only screen and (min-width: 333px) and (max-width: 761px){
+  body{
+    font-family: 'Poppins', sans-serif;
+    background-image: url(../imagens/blurry-gradient-haikei.svg) ;
+    background-repeat: no-repeat;
+    background-size: cover;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 90vh;
+  }
+  .conteiner{
+    padding: 20px;
+    margin: 10px;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    border-radius: 30px;
+    backdrop-filter: blur(16px) saturate(180%);
+    -webkit-backdrop-filter: blur(16px) saturate(180%);
+    background-color: rgba(255, 255, 255, 0.75);
+    border-radius: 12px;
+    border: 1px solid rgba(209, 213, 219, 0.3);
+  }
+  .top{
+    margin-top: 10px;
+  }
+  h2{
+    font-size: 30px;
+  }
+  span{
+    color: #ff0000;
+  }
+  .logo-page img{
+    border-radius: 30px;
+    width: 100%;
+  }
+  .inputs{
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+  }
+  input{
+    background-color: #eee;
+    border-radius: 10px;
+    border: none;
+    padding: 10px 13px;
+    margin: 10px;
+  }
+  label{
+    margin: 10px 0;
+  }
+  .checkbox{
+    margin: 20px 0;
+  }
+  button{
+    border-radius: 20px;
+    border: 1px solid #f28705;
+    background-color: #f28705;
+    color: #FFFFFF;
+    font-size: 15px;
+    font-weight: 700;
+    margin: 10px;
+    padding: 12px 80px;
+    letter-spacing: 1px;
+    text-transform: capitalize;
+    transition: 0.3s ease-in-out;
+  }
+  button:active{
+    transform: scale(0.95);
+  }
+  button:focus{
+    outline: none;
+  }
+  .Cadastrar-se{
+    margin: 30px 0;
+    width: 100%;
+    text-align: center;
+  }
+  .Cadastrar-se a{
+    font-size: 13px;
+    color: #ff0000;
+    text-decoration: none;
+  }
+}
+

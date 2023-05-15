@@ -1,0 +1,300 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500&display=swap");
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: "Roboto", sans-serif;
+}
+
+header {
+  background-image: linear-gradient(to bottom, #b40303, #590202);
+}
+header ul {
+  display: flex;
+  align-items: center;
+  list-style-type: none;
+  justify-content: space-around;
+  height: 80px;
+}
+header ul li a {
+  text-decoration: none;
+  color: white;
+  font-weight: 500;
+}
+header a:hover {
+  color: #f28705;
+}
+
+.pesquisa input {
+  padding: 10px 40px;
+  padding-right: 0.7rem;
+  font-size: 1rem;
+  background-color: white;
+  border-radius: 10px;
+  border: none;
+}
+
+input::placeholder:focus {
+  color: white;
+  font-weight: lighter;
+  font-family: "Poppins", sans-serif;
+}
+
+.pesquisa button {
+  background-image: linear-gradient(to bottom, #ffa436, #ff6600);
+  color: white;
+  padding: 12px;
+  border-radius: 8px;
+  border: none;
+}
+.pesquisa button:hover {
+  background-image: linear-gradient(to bottom, #b40303, #590202);
+  color: white;
+}
+.btn-ver-mais {
+  background-image: linear-gradient(to bottom, #ffa436, #ff6600);
+  color: white;
+  border: none;
+  padding: 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  position: relative; /* permite que a posição do menu seja relativa ao botão */
+}
+.btn-ver-mais:hover {
+  background-image: linear-gradient(to bottom, #b40303, #590202);
+}
+
+.menubar {
+  position: absolute;
+  top: 100%; /* posiciona o menu abaixo do botão */
+  left: 0;
+  display: none; /* esconde o menu inicialmente */
+  background-color: #f9f9f9;
+  color: #590202;
+  padding: 10px;
+  width: 100%;
+  list-style: none;
+  border-radius: 5px;
+  margin-top: 10px;
+}
+
+.menubar li {
+  padding: 5px 0;
+  cursor: pointer;
+}
+
+.menubar li:hover {
+  background-color: #ddd;
+}
+
+.menubar a {
+  color: #590202;
+}
+
+/* exibe o menu quando o botão é clicado */
+.btn-ver-mais:focus-within .menubar {
+  display: block;
+}
+
+/* estiliza o botão quando o menu é exibido */
+.btn-ver-mais:focus {
+  background-color: #ffa632;
+  outline: none;
+}
+
+/* estiliza os links do menu */
+.menubar a {
+  display: block;
+  text-decoration: none;
+}
+
+.menubar a:hover {
+  text-decoration: underline;
+  color: #f28705;
+}
+.container {
+  text-align: center;
+  margin: 70px;
+}
+.titulo {
+  font-size: 3.1rem;
+  font-weight: 500;
+}
+.paragrafo {
+}
+.secoes {
+  display: flex;
+}
+.btn-codes button {
+  width: 200px;
+  padding: 15px;
+  margin: 20px 0;
+  font-size: 0.9rem;
+  background-image: linear-gradient(to bottom, #b40303, #592020);
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+.btn-codes a {
+  color: white;
+  text-decoration: none;
+}
+.btn-codes button:hover {
+  background-image: linear-gradient(to bottom, #b40303, #f28705);
+}
+.item p {
+  margin-top: 15px;
+}
+.item a {
+  color: black;
+  text-decoration: none;
+}
+.item a:hover {
+  color: #ddd;
+}
+.album {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  margin-top: 10px;
+  margin-bottom: 70px;
+  border: 1px solid rgba(0, 0, 0, 0.226);
+  border-radius: 5px;
+  padding: 40px;
+}
+.album:hover {
+  background-image: linear-gradient(to bottom, #b40303, #590202);
+  color: white;
+}
+.album p {
+  font-size: 2rem;
+}
+.album img {
+  border-radius: 5px;
+}
+.descricao {
+  padding: 0px 10px;
+}
+.card {
+  display: flex;
+  text-align: center;
+  align-items: center;
+  border-radius: 5px;
+}
+
+.card2 {
+  display: flex;
+  text-align: center;
+  align-items: center;
+  border-radius: 5px;
+}
+.cardpedido {
+  border: 1px solid rgba(0, 0, 0, 0.226);
+  border-radius: 5px;
+  margin: 10px;
+  height: 450px;
+  width: 500px;
+}
+.carrinho button {
+  width: 170px;
+  padding: 5px;
+  margin: 20px 0;
+  font-size: 0.9rem;
+  background-image: linear-gradient(to bottom, #b40303, #592020);
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+.menu {
+  background-image: linear-gradient(to bottom, #ffa436, #ff6600);
+  padding: 8px;
+  width: 50px;
+  border-radius: 8px;
+  border: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.menu:hover {
+  background-image: linear-gradient(to bottom, #b40303, #590202);
+}
+.carrinho a {
+  color: white;
+  text-decoration: none;
+}
+.carrinho button:hover {
+  background-image: linear-gradient(to bottom, #b40303, #f28705);
+}
+.carrinhodisplay {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+.pedido {
+  margin: 10px 0px;
+}
+.pedido img {
+  margin-top: 5px;
+  border-radius: 5px;
+  height: 150px;
+  width: 170px;
+}
+.infos {
+  margin: 20px 0;
+  font-size: 1rem;
+  font-weight: 500;
+}
+.infos a {
+  text-decoration: none;
+  color: #b40303;
+}
+.infos a:hover {
+  color: #590202;
+}
+
+.produtos {
+  display: flex;
+  margin: 30px;
+  align-items: center;
+  justify-content: space-between;
+  background-image: linear-gradient(to bottom, #b40303, #590202);
+  color: white;
+  border-radius: 10px;
+  padding: 20px;
+  border: 1px solid rgba(0, 0, 0, 0.014);
+  box-shadow: 3px 3px 1px rgba(0, 0, 0, 0.377);
+}
+.produtos p,
+a {
+  padding: 0 6px;
+}
+.produtos img {
+  width: 60px;
+  height: 60px;
+}
+.produtos a {
+  color: #f28705;
+}
+.produtos a:hover {
+  color: #ffb356;
+}
+.btn-ver {
+  background-color: #f28705;
+  color: white;
+  border: none;
+  padding: 10px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.btn-ver-mais:focus .menubar {
+  display: block;
+}
+footer {
+  padding: 40px;
+  display: flex;
+  justify-content: space-between;
+}
+footer a {
+  text-decoration: none;
+}
