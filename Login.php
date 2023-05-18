@@ -54,7 +54,7 @@ if(isset($_POST['email']) || isset($_POST['senha'])) {
             <button type="submit">Entrar</button>
           </form>
         <div class="Cadastrar-se">
-          <a href="/login/Cadastro.html">Ainda não possui uma conta? Cadastrar-se</a>
+          <a href="cadastro.php">Ainda não possui uma conta? Cadastrar-se</a>
         </div>
       </div>
     </div>

@@ -1,7 +1,5 @@
 <?php
-  if(!isset($_SESSION)) {
-      session_start();
-  }
+include('PHP/Protect.php');
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -42,7 +40,6 @@
       <div class="container">
         <section class="boasvindas">
           <div class="container">
-            <h2>Olá <?php echo $_SESSION['nome']; ?></h2>
             <h2 class="titulo">
               Seja bem-vindo <br />
               a plataforma ServeJá!
