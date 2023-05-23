@@ -53,8 +53,8 @@
     background-color: #eee;
     border-radius: 10px;
     border: none;
-    padding: 10px 13px;
-    margin: 8px 0;
+    padding: 15px 13px;
+    margin: 5px 0;
   }
   label{
     margin: 10px 0;
@@ -234,6 +234,10 @@
   .logo-page img{
     border-radius: 30px;
     width: 100%;
+  }
+  .test{
+    justify-content: center;
+    align-items: center;
   }
   .inputs{
     margin-top: 20px;

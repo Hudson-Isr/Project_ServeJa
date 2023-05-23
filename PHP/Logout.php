@@ -1,11 +1,11 @@
 <?php
 
-@include 'config.php';
+@include 'Config.php';
 
 session_start();
 session_unset();
 session_destroy();
 
-header('location:/*Pagina de Login*/');
+header("Location: login.php");
 
 ?>
