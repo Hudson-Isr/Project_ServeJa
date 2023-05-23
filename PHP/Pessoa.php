@@ -1,6 +1,6 @@
 <?php
 
-abstract class Pessoa{
+class Pessoa{
     protected string $nome;
     protected string $email;
     protected int $senha;
@@ -44,13 +44,4 @@ class Funcionario extends Pessoa{
 //ADM
 class ADM extends Pessoa{
 
-}
-
-//Função login
-class Login extends Pessoa{
-    public function login(){
-        if($this->email == 'teste@teste.com' and $this->senha == '1234'){
-            echo "login efetuado";
-        }
-    }
 }
