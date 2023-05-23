@@ -1,9 +1,9 @@
 <?php
 
-class Pessoa {
+class PessoaDAO {
 
     public function create (Pessoa $Pessoa) {
-        $sql = 'INSERT INTO Pessoa (nome, email, senha, CPF) VALUES (?,?,?,?)';
+        $sql = 'INSERT INTO pessoa (nome, email, senha, CPF) VALUES (?,?,?,?)';
         $stmt = Conexao::getConn()->prepare($sql);
         $stmt->bindValue(1, $Pessoa->getNome());
         $stmt->bindValue(2, $Pessoa->getEmail());
@@ -14,7 +14,7 @@ class Pessoa {
     }
 
     public function read(){
-        $sql = 'SELECT * FROM Pessoa';
+        $sql = 'SELECT * FROM pessoa';
 
         $stmt = Conexao::getConn()->prepare($sql);
         $stmt->execute();
@@ -28,7 +28,7 @@ class Pessoa {
     }
 
     public function update(Pessoa $Pessoa) {
-        $sql = 'UPDATE Pessoa SET nome = ?, email = ?, senha = ?, CPF =  ? WHERE id = ?';
+        $sql = 'UPDATE pessoa SET nome = ?, email = ?, senha = ?, CPF =  ? WHERE id = ?';
         $stmt = Conexao::getConn()->prepare($sql);
         $stmt->bindValue(1, $Pessoa->getNome());
         $stmt->bindValue(2, $Pessoa->getEmail());
@@ -39,7 +39,7 @@ class Pessoa {
     }
 
     public function delete($id) {
-        $sql = 'DELETE FROM Pessoa WHERE id = ?';
+        $sql = 'DELETE FROM pessoa WHERE id = ?';
         $stmt = Conexao::getConn()->prepare($sql);
         $stmt->bindValue(1, $id);
 

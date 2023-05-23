@@ -1,6 +1,6 @@
 <?php
 
-class Produtos {
+class ProdutosDAO {
 
     public function create (Produtos $Produtos) {
         $sql = 'INSERT INTO Produtos (nome, lote, QTD) VALUES (?,?,?)';
