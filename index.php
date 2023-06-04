@@ -1,29 +1,29 @@
 <?php
 
-@include('PHP/Config.php');
+@include('PHP/Start.php');
 
-if (isset($_POST['email']) || isset($_POST['senha'])) {
-  $conexao = Conexao::getConn(); //puxando a class Conexao;
-  $sql_code = "SELECT * FROM pessoa WHERE email = :email AND senha = :senha"; //Realizando a verificação dos campos no banco;
-  $sql_query = $conexao->prepare($sql_code);
-  $sql_query->bindParam(':email', $_POST['email']); //Verificaçao por parametro;
-  $sql_query->bindParam(':senha', $_POST['senha']);
+$sql = 'INSERT INTO pessoa (nome, email, senha) VALUES (?,?,?)';
+$pessoaDAO = new PessoaDAO();
+$pessoa = new Pessoa();
+$bd = Conexao::getConn()->prepare($sql);
 
-  $sql_query->execute();
-  $quantidade = $sql_query->rowCount();
+if (isset($_POST['criar_cliente'])) {
+  $nome = $_POST['nome'];
+  $email = $_POST['email'];
+  $senha = $_POST['senha'];
 
-  if ($quantidade == 1) {
-    $usuario = $sql_query->fetch(PDO::FETCH_ASSOC);
+  $pessoa->setNome($nome);
+  $pessoa->setEmail($email);
+  $pessoa->setSenha($senha);
+          
+  $pessoaDAO->create($pessoa);
 
-    if (!isset($_SESSION)) {
-      session_start();
-    }
+  session_start();
+  $_SESSION['nome'] = $nome;
+  $_SESSION['email'] = $email;
 
-    $_SESSION['id'] = $usuario['id'];
-    $_SESSION['nome'] = $usuario['nome'];
-
-    header("Location: index-pg-clogin.php");
-  }
+  header("location: /serveja/client/client-index.php?id=$nome");
+  exit;
 }
 ?>
 <!DOCTYPE html>
@@ -34,6 +34,7 @@ if (isset($_POST['email']) || isset($_POST['senha'])) {
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/normalize.css">
 
   <title>Login</title>
 </head>
@@ -49,12 +50,14 @@ if (isset($_POST['email']) || isset($_POST['senha'])) {
           <h4>ao <strong><span class="emp">ServeJá!</span></strong></h4>
       </div>
       <div class="test">
-        <form action="" method="POST">
+        <form action="" method="POST" autocomplete="off">
+          <label for="nome">Nome:</label>
+          <input type="text" onchange="this.value = this.value.trim()" placeholder="Digite seu nome." name="nome" required />
           <label for="E-mail">E-mail:</label>
-          <input type="email" placeholder="Digite seu e-mail." name="email" required />
+          <input type="email" onchange="this.value = this.value.trim()" placeholder="Digite seu e-mail." name="email" required />
           <label for="Password">Senha:</label>
-          <input type="password" placeholder="Digite sua senha." name="senha" required />
-          <button type="submit">Entrar</button>
+          <input type="password" onchange="this.value = this.value.trim()" placeholder="Digite sua senha." name="senha" required />
+          <button type="submit" name="criar_cliente">Entrar</button>
         </form>
       </div>
       <div class="Cadastrar-se">

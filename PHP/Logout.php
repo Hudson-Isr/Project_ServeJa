@@ -1,11 +1,11 @@
 <?php
 
-@include 'Config.php';
+// @include 'Config.php';
 
-session_start();
-session_unset();
-session_destroy();
+// session_start();
+// session_unset();
+// session_destroy();
 
-header("Location: login.php");
+//header("Location: /serveja/client/client-index.php");
 
 ?>

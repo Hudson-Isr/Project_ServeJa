@@ -1,0 +1,23 @@
+<form action='' method='POST' autocomplete='off'>
+    <input type='hidden' name='id' value='row[id]'>
+    <div class='row mb-3'>
+        <label class='col-sm-3 col-form-label'>Novo Nome</label>
+    </div>
+    <div class='col-sm-6'>
+        <input type='text' name='nome' class='form-control' value='row[nome]'>
+    </div>
+
+    <div class='row mb-3'>
+        <label class='col-sm-3 col-form-label'>Novo Valor</label>
+    </div>
+    <div class='col-sm-6'>
+        <input type='text' name='valor' class='form-control' value='row[valor]'>
+    </div>
+
+    <div class='row mb-3'>
+        <label class='col-sm-3 col-form-label'>Novo tempo de preparo</label>
+    </div>
+    <div class='col-sm-6'>
+        <input type='text' name='tempo' class='form-control' value='row[tempo]'>
+    </div>
+</form>

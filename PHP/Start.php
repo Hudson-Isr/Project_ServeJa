@@ -1,15 +1,12 @@
 <?php
-@include('PHP/Config.php');
-@include('PHP/PratoDAO.php');
-@include('PHP/Prato.php');
-@include('PHP/Pessoa.php');
-@include('PHP/PessoaDAO.php');
-@include('PHP/Produtos.php');
-@include('PHP/ProdutosDAO.php');
+@include('Config.php');
+@include('PratoDAO.php');
+@include('Prato.php');
+@include('Pessoa.php');
+@include('PessoaDAO.php');
+@include('../includes/boostrap.php');
 $prato = new Prato();
 $pratoDAO = new PratoDAO();
 $pessoa = new Pessoa();
 $pessoaDAO = new PessoaDAO();
-$produtos = new Produtos();
-$produtosDAO = new ProdutosDAO();
 ?>
