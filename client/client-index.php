@@ -24,7 +24,7 @@ $nome = $_SESSION['nome'];
             <a href="#" class="btn btn-secondary my-2">Digite o código da mesa <i class="bi bi-keyboard"></i></a>
             </p>
         </div>
-        <img src="/projeto-serveja/images/Hamburger-rafiki.png" alt="">
+        <img src="/serveja/images/Hamburger-rafiki.png" alt="">
     </section>
     <style>img{width:13%;}</style>
 </main>

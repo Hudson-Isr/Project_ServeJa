@@ -67,16 +67,6 @@ CREATE TABLE `pessoa` (
 --
 -- Extraindo dados da tabela `pessoa`
 --
-
-INSERT INTO `pessoa` (`id`, `nome`, `email`, `senha`) VALUES
-(1, 'Daniel', 'ddgamer1799@gmail.com', '17032004'),
-(2, 'Daniel', 'ddgamer1799@gmail.com', '17032004'),
-(3, 'Daniel', 'ddgamer1799@gmail.com', '17032004'),
-(4, 'Daniel', 'ddgamer1799@gmail.com', '17032004'),
-(5, 'teste', '123@gmail.com', '123'),
-(6, 'wqew', 'qewqe@gmail.com', '123123'),
-(7, '312312321', '312321@gmail.com', '123');
-
 -- --------------------------------------------------------
 
 --
@@ -96,10 +86,6 @@ CREATE TABLE `prato` (
 --
 -- Extraindo dados da tabela `prato`
 --
-
-INSERT INTO `prato` (`id`, `nome_prato`, `descricao`, `preco`, `image_url`, `tempo`, `code`) VALUES
-(28, '.', 'reste', '2', 'IMG-646f9efd98f6f7.26568376.jpg', 5, '');
-
 --
 -- Índices para tabelas despejadas
 --

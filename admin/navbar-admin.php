@@ -1,6 +1,6 @@
 <?php
 
-$caminho = "http://localhost/projeto-serveja/admin/";
+$caminho = "http://localhost/serveja/admin/";
 
 ?>
 <title>Administração | ServeJá</title>
