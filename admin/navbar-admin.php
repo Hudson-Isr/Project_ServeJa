@@ -34,9 +34,6 @@ $caminho = "http://localhost/projeto-serveja/admin/";
             </form>
         </div>
     </div>
-    <button class="carti btn btn-outline-light" type="menu">
-        <i class="bi bi-cart"></i>
-    </button>
 </nav>
 
 <style>

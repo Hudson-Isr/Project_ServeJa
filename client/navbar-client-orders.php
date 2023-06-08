@@ -15,7 +15,7 @@ $caminho = "http://localhost/serveja/client/";
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item">
-                    <a class="nav-link" href="<?php echo $caminho?>client-index.php">Início</a>
+                    <a class="nav-link" href="<?php echo $caminho?>client-index-mesa1.php">Início</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link active" href="<?php $caminho?>client-orders.php">Pedidos</a>
@@ -32,9 +32,6 @@ $caminho = "http://localhost/serveja/client/";
             </form>
         </div>
     </div>
-    <button class="carti btn btn-outline-light" type="menu">
-        <i class="bi bi-cart"></i>
-    </button>
 </nav>
 
 <style>

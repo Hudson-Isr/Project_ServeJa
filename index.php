@@ -8,22 +8,52 @@ $pessoa = new Pessoa();
 $bd = Conexao::getConn()->prepare($sql);
 
 if (isset($_POST['criar_cliente'])) {
-  $nome = $_POST['nome'];
-  $email = $_POST['email'];
-  $senha = $_POST['senha'];
+  $conn = new mysqli('localhost', 'root', '', 'serveja');
 
-  $pessoa->setNome($nome);
-  $pessoa->setEmail($email);
-  $pessoa->setSenha($senha);
-          
-  $pessoaDAO->create($pessoa);
-
-  session_start();
-  $_SESSION['nome'] = $nome;
-  $_SESSION['email'] = $email;
-
-  header("location: /serveja/client/client-index.php?id=$nome");
-  exit;
+  try{
+    $nome = $_POST['nome'];
+    $email = $_POST['email'];
+    $senha = $_POST['senha'];
+        
+    #check email before insert
+    $sql="SELECT email FROM pessoa where email='$email'";
+    $stmt=$conn->prepare( $sql );
+    $stmt->execute();
+    $stmt->store_result();
+    
+    if( $stmt->num_rows==0 ){
+        /* email does not exist - perform insert */
+        $pessoa->setNome($nome);
+        $pessoa->setEmail($email);
+        $pessoa->setSenha($senha);
+                
+        $pessoaDAO->create($pessoa);
+      
+        session_start();
+        $_SESSION['nome'] = $nome;
+        $_SESSION['email'] = $email;
+        $cliente = "SELECT * FROM pessoa WHERE email='$email'";
+        $result = $conn->query($cliente);
+        while ($row = $result->fetch_assoc()) 
+        {
+          $_SESSION['id'] = $row["id"];  
+        }
+        $id = $_SESSION['id'];
+      
+        header("location: /serveja/client/client-index.php?id=$id");
+        exit;
+        
+    }else{
+        /* email does exist - tell user */
+        $stmt->free_result();
+        $stmt->close();
+        
+        exit( header('Location: ?error=true&email=true' ) );
+    }
+    
+}catch( mysqli_sql_exception $e ){
+    exit( $e->getMessage() );
+}
 }
 ?>
 <!DOCTYPE html>

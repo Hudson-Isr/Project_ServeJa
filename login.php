@@ -19,8 +19,12 @@ if (isset($_POST['email']) || isset($_POST['senha'])) {
     if (!isset($_SESSION)) {
       session_start();
     }
-
-    $_SESSION['id'] = $usuario['id'];
+    $cliente = "SELECT * FROM pessoa WHERE email='$email'";
+    $result = $conn->query($cliente);
+    while ($row = $result->fetch_assoc()) 
+    {
+      $_SESSION['id'] = $row["id"];  
+    }
     $_SESSION['nome'] = $usuario['nome'];
     $_SESSION['email'] = $usuario['email'];
 

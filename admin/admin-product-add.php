@@ -44,7 +44,7 @@ if (isset($_POST['adicionar_prato'])) {
         else {
             
                 if ($error === 0) {
-                    if ($img_size > 1250000) {
+                    if ($img_size > 125000) {
                         $em = "Sorry, your file is too large.";
                         header("Location: /serveja/admin/admin-menu.php?error=$em");
                     }else {
@@ -102,7 +102,7 @@ exit;
             </div>
             <div class="col-3">
                 <label required for="tempo" class="form-label">Tempo de preparo</label>
-                <input required name="tempo" type="text" class="form-control" id="tempo" placeholder="Inserir tempo em minutos...">
+                <input required name="tempo" type="number" class="form-control" id="tempo" placeholder="Inserir tempo em minutos...">
             </div>
             <div class="col-sm-8 mb-3">
                 <label required for="desc" class="form-label">Descrição</label>

@@ -1,7 +1,9 @@
 <?php
-include '../includes/boostrap.php';
-include 'navbar-admin.php';
-include '../PHP/Start.php';
+
+@include "navbar-admin.php";
+@include '../PHP/Start.php';
+
+
 
 
 // FAZER GRÁFICO 
@@ -65,6 +67,7 @@ if (isset($_POST['voltar'])) {
 
 ?>
 
+
 <div class='d-flex justify-content-between'>
     <?php
     if (!empty($error)) {
@@ -114,14 +117,14 @@ if (isset($_POST['voltar'])) {
                         <img class='bd-placeholder-img card-img-top' width='100%' height='225' xmlns='http://www.w3.org/2000/svg' src='../upload/$row[image_url]' focusable='false'>
 
                         <div class='card-body'>
-                            <p class='card-text'>Nome: $row[nome_prato] | Valor: R$ $row[preco]</p>
-                            <p class='card-text'>Descrição: $row[descricao]</p>
+                            <p class='card-text'><b>Nome:</b> $row[nome_prato] | <b>Valor:</b> R$ $row[preco]</p>
+                            <p class='card-text'><b>Descrição:</b> $row[descricao]</p>
                             <div class='d-flex justify-content-between align-items-center'>
                                 <div class='btn-group'>
                                     <button type='button' class='btn btn-sm btn-outline-secondary' data-bs-toggle='modal' data-bs-target='#verModal$row[id]''>Editar</button>
                                     <button type='submit' class='btn btn-sm btn-outline-secondary'><a class='del' href='/serveja/admin/delete-prato.php?id=$row[id]'>Excluir</a></button>
                                 </div>
-                                <small class='text-muted'>Tempo de preparo: $row[tempo] mins</small>
+                                <small class='text-muted'>Tempo de preparo:<b> $row[tempo] mins </b></small>
                             </div>
                         </div>
                     </div>
@@ -137,30 +140,31 @@ if (isset($_POST['voltar'])) {
                                 <button type='button' class='btn-close' data-bs-dismiss='modal' aria-label='Close'></button>
                             </div>
                             <div class='modal-body'>
-                                <p class='card-text'>Nome atual: $row[nome_prato] | Valor atual: R$ $row[preco]</p>
-                                <p>Descrição: $row[descricao]</p>
+                                <p class='card-text'><b>Nome atual:</b> $row[nome_prato] | <b>Valor atual:</b> R$ $row[preco]</p>
+                                <p><b>Descrição:</b> $row[descricao]</p>
                             </div>
+                            <hr>
                             <div class='container'>
                                 <form class='row' action='' method='POST' autocomplete='OFF' class='column' enctype='multipart/form-data'>
                                     <input type='hidden' name='id' value='$row[id]'>
                                     <div class='col-sm-4'>
-                                        <label for='nome' class='form-label'>Novo Nome</label>
+                                        <label for='nome' class='form-label'><b>Novo Nome</b></label>
                                         <input required onchange='this.value = this.value.trim()' name='nome' type='text' class='form-control' id='nome' value='$row[nome_prato]' placeholder='Hamburgão'>
                                     </div>
                                     <div class='col-sm-4'>
-                                        <label for='valor' class='form-label'>Novo Valor</label>
+                                        <label for='valor' class='form-label'><b>Novo Valor</b></label>
                                         <input required onchange='this.value = this.value.trim()' name='valor' type='number' class='form-control' id='valor' value='$row[preco]' placeholder='16'>
                                     </div>
                                     <div class='col-sm-4'>
-                                        <label for='tempo' class='form-label'>Novo Tempo</label>
+                                        <label for='tempo' class='form-label'><b>Novo Tempo</b></label>
                                         <input required onchange='this.value = this.value.trim()' name='tempo' type='number' class='form-control' value='$row[tempo]' id='tempo'>
                                     </div>
                                     <div class='col mb-3 mt-3'>
-                                        <label for='descricao' class='form-label'>Nova Descrição</label>
-                                        <textarea required onchange='this.value = this.value.trim()' style='resize: none;' name='descricao' class='form-control' id='descricao' rows='5'>$row[descricao]</textarea>
+                                        <label for='descricao' class='form-label'><b>Nova Descrição</b></label>
+                                        <textarea required onchange='this.value = this.value.trim()' style='resize: none;' name='descricao' class='form-control' id='descricao' rows='5'></textarea>
                                     </div>
                                     <div class='col mb-3 mt-3'>
-                                        <label for='file' class='form-label'>Foto do prato</label>
+                                        <label for='file' class='form-label'><b>Foto do prato</b></label>
                                         <input name='my_image' type='file' class='form-control'>
                                     </div>
                                 <div class='modal-footer'>

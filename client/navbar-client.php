@@ -32,9 +32,6 @@ $caminho = "http://localhost/serveja/client/";
             </form>
         </div>
     </div>
-    <button data-bs-toggle='modal' data-bs-target='#verCarrinho'' class="carti btn btn-outline-light" type="menu">
-        <i class="bi bi-cart"></i>
-    </button>
 </nav>
 
 <style>

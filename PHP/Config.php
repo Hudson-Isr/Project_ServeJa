@@ -1,7 +1,5 @@
 <?php
 
-
-
 class Conexao {
     private static $instance;
 
