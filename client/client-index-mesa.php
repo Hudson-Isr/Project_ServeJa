@@ -16,6 +16,16 @@ while ($row = $result->fetch_assoc()) {
     $num_mesa= $row["num_mesa"];
 }
 
+$codigo = $_GET['code'];
+$stat = "Ocupado";
+$mesa = "SELECT * FROM mesa WHERE codigo='$codigo'";
+$result = $conn->query($mesa);
+while ($row = $result->fetch_assoc()) {
+    $id_mesa = $row["id"];
+}
+$query = "UPDATE mesa SET status = '$stat', nome_cliente = '$nome' WHERE id=$id_mesa";
+$query_run = mysqli_query($conn, $query);
+
 if (isset($_POST['checkout'])) {
     $id_prato = $_POST["prato"];
     $obs = $_POST['obs'];

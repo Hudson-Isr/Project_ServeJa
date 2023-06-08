@@ -7,9 +7,9 @@ $conn = new mysqli('localhost', 'root', '', 'serveja');
 if (isset($_POST['add_mesa'])) {
     try {
         $mesa = $_POST["num_mesa"];
-        $status = "Livre";
+        $qr_code = "http://localhost/serveja/client/client-index-mesa.php?code=$codigo_mesa";
         $codigo_mesa = get_rand_alphanumeric(5);
-
+        $status = "Livre";
         header("location: /serveja/admin/admin-mesas.php");
         #check email before insert
         $sql = "SELECT num_mesa FROM mesa where num_mesa='$mesa'";
@@ -82,7 +82,7 @@ if (isset($_GET['error']) == "mesa") {
     ";
 }
 
-if (isset($_GET['deletar']) == "mesa") {     
+if (isset($_GET['deletar']) == "mesa") {
     $mesa = "Mesa deletada com sucesso!";
     echo "
     <div class='mensagem container position-absolute top-1 start-50 w-25 alert alert-success alert-dismissible fade show' role='alert'>
@@ -90,9 +90,9 @@ if (isset($_GET['deletar']) == "mesa") {
         <button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button>
     </div>
     ";
-} 
+}
 
-if (isset($_GET['sucesso']) == "desocupar") {     
+if (isset($_GET['sucesso']) == "desocupar") {
     $mesa = "Mesa descupada com sucesso!";
     echo "
     <div class='mensagem container position-absolute top-1 start-50 w-25 alert alert-success alert-dismissible fade show' role='alert'>
@@ -100,9 +100,9 @@ if (isset($_GET['sucesso']) == "desocupar") {
         <button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button>
     </div>
     ";
-} 
+}
 
-if (isset($_GET['success']) == "mesa") {     
+if (isset($_GET['success']) == "mesa") {
     $mesa = "Mesa cadastrada com sucesso!";
     echo "
     <div class='mensagem container position-absolute top-1 start-50 w-25 alert alert-success alert-dismissible fade show' role='alert'>
@@ -110,7 +110,7 @@ if (isset($_GET['success']) == "mesa") {
         <button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button>
     </div>
     ";
-} 
+}
 ?>
 
 <div class='modal fade' id='verModal' tabindex='-1' aria-labelledby='exampleModalLabel' aria-hidden='true'>
@@ -154,6 +154,7 @@ if (isset($_GET['success']) == "mesa") {
                                 <th>Ocupada Por</th>
                                 <th>Código da Mesa</th>
                                 <th>Ação</th>
+                                <th></th>
                             </tr>
                         </thead>
                         <tbody class="table-body">
@@ -178,7 +179,26 @@ if (isset($_GET['success']) == "mesa") {
                                     <td><span class='badge bg-success'>$row[status]</span></td>
                                     <td>$row[codigo]</td>
                                     <td><form method='POST'><input type='hidden' name='id_mesa' value='$row[id]'><button type='submit' name='del_mesa' class='btn btn-sm btn-outline-secondary'><i class='fa fa-ellipsis-h text-black-50 bi bi-trash'></i></button></form></td>
+                                    <td><button type='button' data-bs-toggle='modal' data-bs-target='#verQRCODE$row[id]' class='btn btn-sm btn-outline-secondary'><i class='fa fa-ellipsis-h text-black-50 bi bi-qr-code'></i></button></td>
                                 </tr>
+
+                                <div class='modal fade' id='verQRCODE$row[id]' tabindex='-1' aria-labelledby='exampleModalLabel' aria-hidden='true'>
+                                    <div class='modal-dialog modal-dialog-scrollable'>
+                                        <div class='modal-content'>
+                                            <div class='modal-header'>
+                                                <h5 class='modal-title' id='exampleModalLabel'><b>QR Code da mesa:</b> nº $row[num_mesa]</h5>
+                                                <button type='button' class='btn-close' data-bs-dismiss='modal' aria-label='Close'></button>
+                                            </div>
+                                            <div class='modal-body print-container'>
+                                                <img src='https://api.qrserver.com/v1/create-qr-code/?data=http://localhost/serveja/client/client-index-mesa.php?code=$row[codigo]' class='img-responsive'>
+                                            </div>
+                                            <div class='modal-footer'>
+                                                <button type='button' class='btn btn-primary' onclick='window.print();'>Imprimir</button>
+                                                <button type='button' class='btn btn-secondary' data-bs-dismiss='modal'>Fechar</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                         ";
                             }
 
@@ -198,7 +218,7 @@ if (isset($_GET['success']) == "mesa") {
                 <div class="table-responsive table-borderless">
                     <table class="table" style="border-collapse: collapse;" border=1 frame=void rules=rows>
                         <thead>
-                            <h2>Livres:</h2>
+                            <h2>Ocupadas:</h2>
                             <tr>
                                 <th>ID da Mesa</th>
                                 <th>Número da Mesa</th>
@@ -246,8 +266,24 @@ if (isset($_GET['success']) == "mesa") {
 <style>
     @import url('https://fonts.googleapis.com/css?family=Assistant');
 
+    @media print{
+        body * {
+            visibility: hidden;
+        }
+
+        .print-container, .print-container * {
+            visibility: visible;
+        }
+    }
+
     .start-50 {
         left: 38% !important;
+    }
+
+    .modal-body > .img-responsive {
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
     }
 
     body {

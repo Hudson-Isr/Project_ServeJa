@@ -84,8 +84,8 @@ if (isset($_POST['cancelar'])) {
                             </div>
                             <div class='modal-body'>
                                 <p class='card-text'><b>Prato:</b> <?php echo $row['pratos'] ?> | <b>Quantidade:</b> <?php echo $row['quant'] ?></p>
-                                <p class='card-text'><b>Data do pedido:</b> <?php echo $data ?>| <b>Valor Unitário:</b> R$ <?php echo $valor_unit ?></p>
-                                <b>Valor Total:</b> R$ <?php echo $row['valor_total'] ?></p>
+                                <p class='card-text'><b>Data do pedido:</b> <?php echo $data ?> | <b>Valor Unitário:</b> R$ <?php echo $valor_unit ?></p>
+                                <b>Valor Total:</b> R$ <?php echo $row['valor_total'] ?> | <b>Status: </b><?php echo $status ?></p>
                                 <p><b>Observação:</b> <?php echo $row['observacao'] ?></p>
                             </div>
                             <div class='modal-footer'>

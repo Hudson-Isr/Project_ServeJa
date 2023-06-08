@@ -27,23 +27,23 @@ else {
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <?php 
-                    if ($_GET['pedido'] == 'false'){
-                        echo "
-                        <li class='nav-item'>
-                        <a class='nav-link active' href='$index'>Início</a>
-                        </li>
-                        <li class='nav-item'>
-                            <a class='nav-link' href='$orders&pedido=true'>Pedidos</a>
-                        </li>
-                        ";
-                    }
-                    else{
+                    if (@$_GET['pedido'] == 'true'){
                         echo "
                         <li class='nav-item'>
                         <a class='nav-link' href='$index&pedido=false'>Início</a>
                         </li>
                         <li class='nav-item'>
                             <a class='nav-link active' href='$orders'>Pedidos</a>
+                        </li>
+                        ";
+                    }
+                    else{
+                        echo "
+                        <li class='nav-item'>
+                        <a class='nav-link active' href='$index'>Início</a>
+                        </li>
+                        <li class='nav-item'>
+                            <a class='nav-link' href='$orders&pedido=true'>Pedidos</a>
                         </li>
                         ";
                     }
