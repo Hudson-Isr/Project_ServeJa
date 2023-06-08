@@ -1,6 +1,7 @@
 <?php
 
 @include('PHP/Start.php');
+$conn = new mysqli('localhost', 'root', '', 'serveja');
 
 if (isset($_POST['email']) || isset($_POST['senha'])) {
 
@@ -14,6 +15,7 @@ if (isset($_POST['email']) || isset($_POST['senha'])) {
   $quantidade = $sql_query->rowCount();
 
   if ($quantidade == 1) {
+    $email = $_POST['email'];
     $usuario = $sql_query->fetch(PDO::FETCH_ASSOC);
 
     if (!isset($_SESSION)) {
@@ -24,10 +26,11 @@ if (isset($_POST['email']) || isset($_POST['senha'])) {
     while ($row = $result->fetch_assoc()) {
       $_SESSION['id'] = $row["id"];
     }
+    $id = $_SESSION['id'];
     $_SESSION['nome'] = $usuario['nome'];
     $_SESSION['email'] = $usuario['email'];
 
-    header("location: /serveja/client/client-index.php");
+    header("location: /serveja/client/client-index.php?id=$id&pedido=false");
   } else {
     header("location: ?error=user");
     exit;

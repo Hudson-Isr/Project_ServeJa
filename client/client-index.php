@@ -20,9 +20,23 @@ if (isset($_POST['entrar_mesa'])) {
         $stmt->store_result();
 
         if ($stmt->num_rows == 0) {
-            header("location: ?error=mesa");
+            header("location: ?error=mesa&pedido=false");
             exit;
-        } else {
+        } 
+        
+        $stat = "SELECT status FROM mesa where codigo='$codigo'";
+
+        $result = $conn->query($stat);
+        while ($row = $result->fetch_assoc()) {
+          $statu = $row["status"];
+        }
+
+        if ($statu == 'Ocupado'){
+            header("location: ?erro=ocupado&pedido=false");
+            exit;
+        }
+        
+        else {
             $mesa = "SELECT * FROM mesa WHERE codigo='$codigo'";
             $result = $conn->query($mesa);
             while ($row = $result->fetch_assoc()) 
@@ -31,7 +45,7 @@ if (isset($_POST['entrar_mesa'])) {
             }
             $query = "UPDATE mesa SET status = '$status', nome_cliente = '$nome' WHERE id=$id_mesa";
             $query_run = mysqli_query($conn, $query);
-            exit(header("location: client-index-mesa.php?code=$codigo"));
+            exit(header("location: client-index-mesa.php?code=$codigo&pedido=false"));
         }
     } catch (mysqli_sql_exception $e) {
         exit($e->getMessage());
@@ -48,6 +62,15 @@ if (isset($_POST['entrar_mesa'])) {
 <?php
 if (isset($_GET['error']) == "mesa") {
     $erro = "Número de mesa não encontrado!";
+    echo "
+    <div class='container position-absolute top-1 start-50 w-25 alert alert-warning alert-dismissible fade show' role='alert'>
+        <strong>Error: </strong> $erro
+        <button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button>
+    </div>
+    ";
+}
+if (isset($_GET['erro']) == "ocupado") {
+    $erro = "Esta mesa está ocupada no momento!";
     echo "
     <div class='container position-absolute top-1 start-50 w-25 alert alert-warning alert-dismissible fade show' role='alert'>
         <strong>Error: </strong> $erro

@@ -39,7 +39,7 @@ if (isset($_POST['criar_cliente'])) {
       }
       $id = $_SESSION['id'];
 
-      header("location: /serveja/client/client-index.php?id=$id");
+      header("location: /serveja/client/client-index.php?id=$id&pedido=false");
       exit;
     } else {
 

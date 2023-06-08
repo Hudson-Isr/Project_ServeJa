@@ -2,12 +2,19 @@
 include "../PHP/Start.php";
 include "../includes/boostrap.php";
 include "navbar-client.php";
+$conn = new mysqli('localhost', 'root', '', 'serveja');
 
 session_start();
 
 $nome = $_SESSION['nome'];
 $id_cliente = $_SESSION['id'];
 $email = $_SESSION['email'];
+$mesa = $_GET['code'];
+$sql = "SELECT num_mesa FROM mesa where codigo='$mesa'";
+$result = $conn->query($sql);
+while ($row = $result->fetch_assoc()) {
+    $num_mesa= $row["num_mesa"];
+}
 
 if (isset($_POST['checkout'])) {
     $id_prato = $_POST["prato"];
@@ -25,10 +32,10 @@ if (isset($_POST['checkout'])) {
     $valor_total = $valor * $quant;
 
     $status = "Aguardando";
-    $query = "INSERT INTO pedido (id_cliente, pratos, valor_total, observacao, quant, status, nome_cliente, id_prato) VALUES ('$id_cliente', '$pratos', '$valor_total', '$obs', '$quant', '$status', '$nome', '$id_prato')";
+    $query = "INSERT INTO pedido (id_cliente, pratos, valor_total, observacao, quant, status, nome_cliente, id_prato, id_mesa) VALUES ('$id_cliente', '$pratos', '$valor_total', '$obs', '$quant', '$status', '$nome', '$id_prato', '$num_mesa')";
 
     $query_run = mysqli_query($conn, $query);
-    exit(header('Location: ?success=pedido'));
+    exit(header("location: ?success=pedido&code=$mesa&pedido=false"));
 
 
     //Verifica se a query executou corretamente, caso não irá exibir o erro na tela.
@@ -40,24 +47,25 @@ if (isset($_POST['checkout'])) {
 ?>
 
 <main>
-<?php
-if (isset($_GET['success']) == "pedido") {     
-    $pedido = "Pedido realizado com sucesso!";
-    echo "
+    <?php
+    if (isset($_GET['success']) == "pedido") {
+        $pedido = "Pedido realizado com sucesso!";
+        echo "
     <div class='mensagem container position-absolute top-1 start-50 w-25 alert alert-success alert-dismissible fade show' role='alert'>
         <strong>$pedido</strong>
         <button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button>
     </div>
     ";
-} 
-?>
+    }
+    ?>
 
     <section class="jumbotron text-center mt-5 mb-5">
         <div class="container text-center">
             <h2 class="jumbotron-heading ">Seja bem-vindo, <?php echo $nome; ?>.</h2>
             <h3>ao<h3>
-                    <h1 class="logo text-danger">ServeJá</h1>
-                    <p class="lead text-dark">Aproveite todos os pratos logo abaixo!</p>
+            <h1 class="logo text-danger">ServeJá</h1>
+            <p class="lead text-dark">Aproveite todos os pratos logo abaixo!</p>
+            <p>Mesa Nº: <b><?php echo $num_mesa ?></b></p>
         </div>
     </section>
     <div class="album py-5 bg-light">
@@ -161,8 +169,9 @@ if (isset($_GET['success']) == "pedido") {
 
         <style>
             .start-50 {
-                left: 38%!important;
+                left: 38% !important;
             }
+
             textarea {
                 resize: none;
                 width: 250px;

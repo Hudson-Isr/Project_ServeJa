@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 08-Jun-2023 às 03:01
+-- Tempo de geração: 08-Jun-2023 às 14:31
 -- Versão do servidor: 10.4.28-MariaDB
 -- versão do PHP: 8.2.4
 
@@ -20,6 +20,20 @@ SET time_zone = "+00:00";
 --
 -- Banco de dados: `serveja`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura da tabela `mesa`
+--
+
+CREATE TABLE `mesa` (
+  `id` int(11) NOT NULL,
+  `codigo` text NOT NULL,
+  `nome_cliente` text NOT NULL,
+  `status` text DEFAULT NULL,
+  `num_mesa` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -75,6 +89,12 @@ CREATE TABLE `prato` (
 --
 
 --
+-- Índices para tabela `mesa`
+--
+ALTER TABLE `mesa`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Índices para tabela `pedido`
 --
 ALTER TABLE `pedido`
@@ -95,6 +115,12 @@ ALTER TABLE `prato`
 --
 -- AUTO_INCREMENT de tabelas despejadas
 --
+
+--
+-- AUTO_INCREMENT de tabela `mesa`
+--
+ALTER TABLE `mesa`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de tabela `pedido`

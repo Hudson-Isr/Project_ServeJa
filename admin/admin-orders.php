@@ -71,7 +71,7 @@ if (isset($_POST['cancelar'])) {
                                 <th>Status</th>
                                 <th>Total</th>
                                 <th>Data</th>
-                                <th></th>
+                                <th>Ação</th>
                             </tr>
                         </thead>
                         <tbody class="table-body">
@@ -88,6 +88,7 @@ if (isset($_POST['cancelar'])) {
                             //Disponibilização do resultado da busca na tela
 
                             while ($row = $aguardando->fetch_assoc()) {
+                                $data = date('d-m-Y', strtotime($row['data']));
                                 echo "
 
                                 <tr class='cell-1' style='border: solid; border-width: 1px 0;'>
@@ -95,7 +96,7 @@ if (isset($_POST['cancelar'])) {
                                     <td>$row[nome_cliente]</td>
                                     <td><span class='badge bg-warning'>$row[status]</span></td>
                                     <td>R$ $row[valor_total]</td>
-                                    <td>$row[data]</td>
+                                    <td>$data</td>
                                     <td><i class='fa fa-ellipsis-h text-black-50'></i><button type='button' class='btn btn-sm btn-outline-secondary' data-bs-toggle='modal' data-bs-target='#verModal$row[id]''>Ver Detalhes</button></td>
                                 </tr>
 
@@ -110,7 +111,7 @@ if (isset($_POST['cancelar'])) {
                                         <div class='modal-body'>
                                             <p class='card-text'><b>Prato:</b> $row[pratos] | <b>Quantidade:</b> $row[quant] | <b>Valor Total:</b> R$ $row[valor_total]</p>
                                             <p><b>Observação:</b> $row[observacao]</p>
-                                            <p><b>Status: </b><span class='badge bg-danger'> $row[status]</span></p>
+                                            <p><b>Status: </b><span class='badge bg-warning'> $row[status]</span></p>
                                         </div>
                                         <div class='modal-footer'>
                                             <form method='POST'>
@@ -167,6 +168,7 @@ if (isset($_POST['cancelar'])) {
                             //Disponibilização do resultado da busca na tela
 
                             while ($row = $preparo->fetch_assoc()) {
+                                $data = date('d-m-Y', strtotime($row['data']));
                                 echo "
 
                                 <tr class='cell-1' style='border: solid; border-width: 1px 0;'>
@@ -174,7 +176,7 @@ if (isset($_POST['cancelar'])) {
                                     <td>$row[nome_cliente]</td>
                                     <td><span class='badge bg-success'>$row[status]</span></td>
                                     <td>R$ $row[valor_total]</td>
-                                    <td>$row[data]</td>
+                                    <td>$data</td>
                                     <td><i class='fa fa-ellipsis-h text-black-50'></i><button type='button' class='btn btn-sm btn-outline-secondary' data-bs-toggle='modal' data-bs-target='#verModal$row[id]''>Ver Detalhes</button></td>
                                 </tr>
                                 <div class='modal fade' id='verModal$row[id]' tabindex='-1' aria-labelledby='exampleModalLabel' aria-hidden='true'>
@@ -187,7 +189,7 @@ if (isset($_POST['cancelar'])) {
                                         <div class='modal-body'>
                                             <p class='card-text'><b>Prato:</b> $row[pratos] | <b>Quantidade:</b> $row[quant] | <b>Valor Total:</b> R$ $row[valor_total]</p>
                                             <p><b>Observação:</b> $row[observacao]</p>
-                                            <p><b>Status: </b><span class='badge bg-danger'> $row[status]</span></p>
+                                            <p><b>Status: </b><span class='badge bg-success'> $row[status]</span></p>
                                         </div>
                                         <div class='modal-footer'>
                                             <form method='POST'>
@@ -227,7 +229,7 @@ if (isset($_POST['cancelar'])) {
                                 <th>Status</th>
                                 <th>Total</th>
                                 <th>Data</th>
-                                <th></th>
+                                <th>Ação</th>
                             </tr>
                         </thead>
                         <tbody class="table-body">
@@ -244,6 +246,7 @@ if (isset($_POST['cancelar'])) {
                             //Disponibilização do resultado da busca na tela
 
                             while ($row = $prontos->fetch_assoc()) {
+                                $data = date('d-m-Y', strtotime($row['data']));
                                 echo "
 
                                 <tr class='cell-1' style='border: solid; border-width: 1px 0;'>
@@ -251,7 +254,7 @@ if (isset($_POST['cancelar'])) {
                                     <td>$row[nome_cliente]</td>
                                     <td><span class='badge bg-primary'>$row[status]</span></td>
                                     <td>R$ $row[valor_total]</td>
-                                    <td>$row[data]</td>
+                                    <td>$data</td>
                                     <td class='botao'><i class='fa fa-ellipsis-h text-black-50'></i><button type='button' class='btn btn-sm btn-outline-secondary' data-bs-toggle='modal' data-bs-target='#verModal$row[id]''>Ver Detalhes</button></td>
                                 </tr>
 
@@ -265,7 +268,7 @@ if (isset($_POST['cancelar'])) {
                                         <div class='modal-body'>
                                             <p class='card-text'><b>Prato:</b> $row[pratos] | <b>Quantidade:</b> $row[quant] | <b>Valor Total:</b> R$ $row[valor_total]</p>
                                             <p><b>Observação:</b> $row[observacao]</p>
-                                            <p><b>Status: </b><span class='badge bg-danger'> $row[status]</span></p>
+                                            <p><b>Status: </b><span class='badge bg-primary'> $row[status]</span></p>
                                         </div>
                                         <div class='modal-footer'>
                                             <button type='button' class='btn btn-secondary' data-bs-dismiss='modal'>Fechar</button>
@@ -299,7 +302,7 @@ if (isset($_POST['cancelar'])) {
                                 <th>Status</th>
                                 <th>Total</th>
                                 <th>Data</th>
-                                <th></th>
+                                <th>Ação</th>
                             </tr>
                         </thead>
                         <tbody class="table-body">
@@ -316,6 +319,7 @@ if (isset($_POST['cancelar'])) {
                             //Disponibilização do resultado da busca na tela
 
                             while ($row = $cancelado->fetch_assoc()) {
+                                $data = date('d-m-Y', strtotime($row['data']));
                                 echo "
 
                                 <tr class='cell-1' style='border: solid; border-width: 1px 0;'>
@@ -323,7 +327,7 @@ if (isset($_POST['cancelar'])) {
                                     <td>$row[nome_cliente]</td>
                                     <td><span class='badge bg-danger'>$row[status]</span></td>
                                     <td>R$ $row[valor_total]</td>
-                                    <td>$row[data]</td>
+                                    <td>$data</td>
                                     <td class='botao'><i class='fa fa-ellipsis-h text-black-50'></i><button type='button' class='btn btn-sm btn-outline-secondary' data-bs-toggle='modal' data-bs-target='#verModal$row[id]''>Ver Detalhes</button></td>
                                 </tr>
 
