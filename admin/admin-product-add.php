@@ -17,7 +17,7 @@ $tempo = '';
 
 
 if (isset($_POST['voltar'])) {
-    header("location: /serveja/admin/admin-menu.php");
+    header("location: /projeto-serveja/admin/admin-menu.php");
     exit;
 }
 

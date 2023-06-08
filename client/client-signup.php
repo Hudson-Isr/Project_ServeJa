@@ -12,7 +12,7 @@
 <body>
   <div class="container">
     <div class="svg">
-      <img src="/serveja/images/singup-content/Hamburger-bro.png" alt="">
+      <img src="/projeto-serveja/images/singup-content/Hamburger-bro.png" alt="">
       <form action="" autocomplete="off">
         <div class="text">
           <h2>Olá, tudo bem?</h2>

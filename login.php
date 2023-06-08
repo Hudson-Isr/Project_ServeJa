@@ -3,7 +3,7 @@
 @include('PHP/Start.php');
 
 if (isset($_POST['email']) || isset($_POST['senha'])) {
-  
+
   $conexao = Conexao::getConn(); //puxando a class Conexao;
   $sql_code = "SELECT * FROM pessoa WHERE email = :email AND senha = :senha"; //Realizando a verificação dos campos no banco;
   $sql_query = $conexao->prepare($sql_code);
@@ -21,19 +21,37 @@ if (isset($_POST['email']) || isset($_POST['senha'])) {
     }
     $cliente = "SELECT * FROM pessoa WHERE email='$email'";
     $result = $conn->query($cliente);
-    while ($row = $result->fetch_assoc()) 
-    {
-      $_SESSION['id'] = $row["id"];  
+    while ($row = $result->fetch_assoc()) {
+      $_SESSION['id'] = $row["id"];
     }
     $_SESSION['nome'] = $usuario['nome'];
     $_SESSION['email'] = $usuario['email'];
 
     header("location: /serveja/client/client-index.php");
+  } else {
+    header("location: ?error=user");
+    exit;
   }
 }
-?>  
+?>
 <!DOCTYPE html>
 <html lang="pt-br">
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
+
+<?php
+if (isset($_GET['error']) == "user") {
+  $erro = "Usuário ou senha incorreto!";
+  echo "
+    <div class='position-absolute top-0 start-50 w-25 alert alert-warning alert-dismissible fade show' role='alert'>
+        <strong>Error: </strong> $erro
+        <button type='button' style='bottom:3px' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button>
+    </div>
+    ";
+}
+?>
 
 <head>
   <meta charset="UTF-8">
@@ -68,5 +86,27 @@ if (isset($_POST['email']) || isset($_POST['senha'])) {
   </div>
   </div>
 </body>
+<style>
+  .alert-dismissible .btn-close button {
+    bottom: 3px;
+  }
+
+  .start-50 {
+    top: 10% !important;
+    left: 38% !important;
+    z-index: 3;
+  }
+
+  .btn-close {
+    padding: 0 !important;
+  }
+
+  .start-50 button {
+    padding-right: 1.5rem !important;
+    bottom:3px !important;
+    top: unset !important;
+    padding-bottom: 2rem !important;
+  }
+</style>
 
 </html>

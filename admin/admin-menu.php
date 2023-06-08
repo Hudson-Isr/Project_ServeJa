@@ -3,9 +3,6 @@
 @include "navbar-admin.php";
 @include '../PHP/Start.php';
 
-
-
-
 // FAZER GRÁFICO 
 $id = '';
 $nome = '';

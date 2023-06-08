@@ -1,6 +1,6 @@
 <?php
 
-$caminho = "http://localhost/serveja/admin/";
+$caminho = "http://localhost/projeto-serveja/admin/";
 
 ?>
 <title>Administração | ServeJá</title>
@@ -23,6 +23,10 @@ $caminho = "http://localhost/serveja/admin/";
                             <hr class="dropdown-divider">
                         </li>
                         <li><a class="dropdown-item" href="<?php $caminho?>admin-menu.php">Cardápio</a></li>
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+                        <li><a class="dropdown-item" href="<?php $caminho?>admin-mesas.php">Mesas</a></li>
                     </ul>
                 </li>
             </ul>

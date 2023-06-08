@@ -8,58 +8,6 @@ session_start();
 $nome = $_SESSION['nome'];
 $id_cliente = $_SESSION['id'];
 $email = $_SESSION['email'];
-// $db_handle = new DBController();
-// if (!empty($_GET["action"])) {
-//     switch ($_GET["action"]) {
-//         case "add":
-//             $id = $_GET['code'];
-//             if (!empty($_POST["quantity"])) {
-//                 $productByCode = $db_handle->runQuery("SELECT * FROM prato WHERE id='$id'");
-//                 $itemArray = array($productByCode[0]["id"] => array('name' => $productByCode[0]["nome_prato"], 'id' => $productByCode[0]["id"], 'quantity' => $_POST["quantity"], 'price' => $productByCode[0]["preco"], 'image' => $productByCode[0]["image_url"]));
-
-//                 if (!empty($_SESSION["cart_item"])) {
-//                     if (in_array($productByCode[0]["id"], array_keys($_SESSION["cart_item"]))) {
-//                         foreach ($_SESSION["cart_item"] as $k => $v) {
-//                             if ($productByCode[0]["id"] == $k) {
-//                                 if (empty($_SESSION["cart_item"][$k]["quantity"])) {
-//                                     $_SESSION["cart_item"][$k]["quantity"] = 0;
-//                                     header("location: /serveja/client/client-index-mesa1.php");
-//                                 }
-//                                 $_SESSION["cart_item"][$k]["quantity"] += $_POST["quantity"];
-//                                 header("location: /serveja/client/client-index-mesa1.php");
-//                             }
-//                             header("location: /serveja/client/client-index-mesa1.php");
-//                         }
-//                     } else {
-//                         $_SESSION["cart_item"] = array_merge($_SESSION["cart_item"], $itemArray);
-//                         header("location: /serveja/client/client-index-mesa1.php");
-//                     }
-//                 } else {
-//                     $_SESSION["cart_item"] = $itemArray;
-//                     header("location: /serveja/client/client-index-mesa1.php");
-//                 }
-//             }
-//             break;
-//         case "remove":  
-//             if (!empty($_SESSION["cart_item"])) {
-//                 foreach ($_SESSION["cart_item"] as $k => $v) {
-//                     if ($_GET['code'] == $k)
-//                         unset($_SESSION["cart_item"][$k]);
-//                     header("location: /serveja/client/client-index-mesa1.php");
-//                     if (empty($_SESSION["cart_item"]))
-//                         unset($_SESSION["cart_item"]);
-//                     header("location: /serveja/client/client-index-mesa1.php");
-//                 }
-//             }
-//             break;
-//         case "empty":
-//             unset($_SESSION["cart_item"]);
-//             header("location: /serveja/client/client-index-mesa1.php");
-//             break;
-//         case "checkout":
-
-//     }
-// }
 
 if (isset($_POST['checkout'])) {
     $id_prato = $_POST["prato"];
@@ -80,7 +28,7 @@ if (isset($_POST['checkout'])) {
     $query = "INSERT INTO pedido (id_cliente, pratos, valor_total, observacao, quant, status, nome_cliente, id_prato) VALUES ('$id_cliente', '$pratos', '$valor_total', '$obs', '$quant', '$status', '$nome', '$id_prato')";
 
     $query_run = mysqli_query($conn, $query);
-    header("location: /serveja/client/client-index-mesa1.php");
+    exit(header('Location: ?success=pedido'));
 
 
     //Verifica se a query executou corretamente, caso não irá exibir o erro na tela.
@@ -92,6 +40,17 @@ if (isset($_POST['checkout'])) {
 ?>
 
 <main>
+<?php
+if (isset($_GET['success']) == "pedido") {     
+    $pedido = "Pedido realizado com sucesso!";
+    echo "
+    <div class='mensagem container position-absolute top-1 start-50 w-25 alert alert-success alert-dismissible fade show' role='alert'>
+        <strong>$pedido</strong>
+        <button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button>
+    </div>
+    ";
+} 
+?>
 
     <section class="jumbotron text-center mt-5 mb-5">
         <div class="container text-center">
@@ -117,7 +76,7 @@ if (isset($_POST['checkout'])) {
                     <div class='vazio mt-4 container text-center d-flex justify-content-center'>
                         <div class='row g-3'>
                             <h3 class='col col-lg-3'>Parece que não tem nenhum prato cadastrado...</h3>
-                            <img class='col-md-auto ' src='/serveja/images/deconstructed-food-amico.svg'>
+                            <img class='col-md-auto ' src='/projeto-serveja/images/deconstructed-food-amico.svg'>
                         </div>
                     </div>
                     ";
@@ -201,6 +160,9 @@ if (isset($_POST['checkout'])) {
 
 
         <style>
+            .start-50 {
+                left: 38%!important;
+            }
             textarea {
                 resize: none;
                 width: 250px;

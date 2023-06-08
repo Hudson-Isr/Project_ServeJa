@@ -37,6 +37,23 @@ if (isset($_POST['pronto'])) {
     }
 }
 
+if (isset($_POST['cancelar'])) {
+    $conn = new mysqli('localhost', 'root', '', 'serveja');
+    $id = $_POST["id"];
+    $status = 'Cancelado';
+
+    $query = "UPDATE pedido SET status='$status' WHERE id=$id";
+
+    $query_run = mysqli_query($conn, $query);
+    header("location: /serveja/admin/admin-orders.php");
+
+
+    //Verifica se a query executou corretamente, caso não irá exibir o erro na tela.
+    if (!$query_run) {
+        $error = "Invalid query: " . $conn->error;
+    }
+}
+
 
 ?>
 
@@ -87,17 +104,19 @@ if (isset($_POST['pronto'])) {
                                 <div class='modal-dialog modal-dialog-scrollable'>
                                     <div class='modal-content'>
                                         <div class='modal-header'>
-                                            <h5 class='modal-title' id='exampleModalLabel'><b>CLiente:</b> $row[nome_cliente]</h5>
+                                            <h5 class='modal-title' id='exampleModalLabel'><b>Cliente:</b> $row[nome_cliente]</h5>
                                             <button type='button' class='btn-close' data-bs-dismiss='modal' aria-label='Close'></button>
                                         </div>
                                         <div class='modal-body'>
                                             <p class='card-text'><b>Prato:</b> $row[pratos] | <b>Quantidade:</b> $row[quant] | <b>Valor Total:</b> R$ $row[valor_total]</p>
                                             <p><b>Observação:</b> $row[observacao]</p>
+                                            <p><b>Status: </b><span class='badge bg-danger'> $row[status]</span></p>
                                         </div>
                                         <div class='modal-footer'>
                                             <form method='POST'>
                                                 <input type='hidden' name='id' value='$row[id]'>
                                                 <button type='submit' name='preparar' class='btn btn-primary' data-bs-dismiss='modal'>Em Preparo</button>
+                                                <button type='submit' name='cancelar' class='btn btn-danger' data-bs-dismiss='modal'>Cancelar</button>
                                                 <button type='button' class='btn btn-secondary' data-bs-dismiss='modal'>Fechar</button>
                                             </form>
                                         </div>
@@ -162,17 +181,19 @@ if (isset($_POST['pronto'])) {
                                 <div class='modal-dialog modal-dialog-scrollable'>
                                     <div class='modal-content'>
                                         <div class='modal-header'>
-                                            <h5 class='modal-title' id='exampleModalLabel'><b>CLiente:</b> $row[nome_cliente]</h5>
+                                            <h5 class='modal-title' id='exampleModalLabel'><b>Cliente:</b> $row[nome_cliente]</h5>
                                             <button type='button' class='btn-close' data-bs-dismiss='modal' aria-label='Close'></button>
                                         </div>
                                         <div class='modal-body'>
                                             <p class='card-text'><b>Prato:</b> $row[pratos] | <b>Quantidade:</b> $row[quant] | <b>Valor Total:</b> R$ $row[valor_total]</p>
                                             <p><b>Observação:</b> $row[observacao]</p>
+                                            <p><b>Status: </b><span class='badge bg-danger'> $row[status]</span></p>
                                         </div>
                                         <div class='modal-footer'>
                                             <form method='POST'>
                                                 <input type='hidden' name='id' value='$row[id]'>
                                                 <button type='submit' name='pronto' class='btn btn-primary' data-bs-dismiss='modal'>Pronto</button>
+                                                <button type='submit' name='cancelar' class='btn btn-danger' data-bs-dismiss='modal'>Cancelar</button>
                                                 <button type='button' class='btn btn-secondary' data-bs-dismiss='modal'>Fechar</button>
                                             </form>
                                         </div>
@@ -233,6 +254,25 @@ if (isset($_POST['pronto'])) {
                                     <td>$row[data]</td>
                                     <td class='botao'><i class='fa fa-ellipsis-h text-black-50'></i><button type='button' class='btn btn-sm btn-outline-secondary' data-bs-toggle='modal' data-bs-target='#verModal$row[id]''>Ver Detalhes</button></td>
                                 </tr>
+
+                                <div class='modal fade' id='verModal$row[id]' tabindex='-1' aria-labelledby='exampleModalLabel' aria-hidden='true'>
+                                <div class='modal-dialog modal-dialog-scrollable'>
+                                    <div class='modal-content'>
+                                        <div class='modal-header'>
+                                            <h5 class='modal-title' id='exampleModalLabel'><b>Cliente:</b> $row[nome_cliente]</h5>
+                                            <button type='button' class='btn-close' data-bs-dismiss='modal' aria-label='Close'></button>
+                                        </div>
+                                        <div class='modal-body'>
+                                            <p class='card-text'><b>Prato:</b> $row[pratos] | <b>Quantidade:</b> $row[quant] | <b>Valor Total:</b> R$ $row[valor_total]</p>
+                                            <p><b>Observação:</b> $row[observacao]</p>
+                                            <p><b>Status: </b><span class='badge bg-danger'> $row[status]</span></p>
+                                        </div>
+                                        <div class='modal-footer'>
+                                            <button type='button' class='btn btn-secondary' data-bs-dismiss='modal'>Fechar</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         ";
                             }
 
@@ -245,15 +285,78 @@ if (isset($_POST['pronto'])) {
     </div>
 </div>
 
-<script>
-    $(document).ready(function() {
+<div class="container mt-5">
+    <div class="d-flex justify-content-center row">
+        <div class="col-md-10">
+            <div class="rounded">
+                <div class="table-responsive table-borderless">
+                    <table class="table">
+                        <thead>
+                            <h2>Cancelados</h2>
+                            <tr>
+                                <th>ID Pedido</th>
+                                <th>Nome do Cliente</th>
+                                <th>Status</th>
+                                <th>Total</th>
+                                <th>Data</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody class="table-body">
+                            <?php
 
-        $('.toggle-btn').click(function() {
-            $(this).toggleClass('active').siblings().removeClass('active');
-        });
+                            $sql = "SELECT * FROM pedido WHERE status='Cancelado' ORDER BY id DESC ";
+                            $conn = new mysqli('localhost', 'root', '', 'serveja');
+                            $cancelado = $conn->query($sql);
 
-    });
-</script>
+                            if (!$cancelado) {
+                                die("Query inválida: " . $conn->error);
+                            }
+
+                            //Disponibilização do resultado da busca na tela
+
+                            while ($row = $cancelado->fetch_assoc()) {
+                                echo "
+
+                                <tr class='cell-1' style='border: solid; border-width: 1px 0;'>
+                                    <td>$row[id]</td>
+                                    <td>$row[nome_cliente]</td>
+                                    <td><span class='badge bg-danger'>$row[status]</span></td>
+                                    <td>R$ $row[valor_total]</td>
+                                    <td>$row[data]</td>
+                                    <td class='botao'><i class='fa fa-ellipsis-h text-black-50'></i><button type='button' class='btn btn-sm btn-outline-secondary' data-bs-toggle='modal' data-bs-target='#verModal$row[id]''>Ver Detalhes</button></td>
+                                </tr>
+
+                                <div class='modal fade' id='verModal$row[id]' tabindex='-1' aria-labelledby='exampleModalLabel' aria-hidden='true'>
+                                <div class='modal-dialog modal-dialog-scrollable'>
+                                    <div class='modal-content'>
+                                        <div class='modal-header'>
+                                            <h5 class='modal-title' id='exampleModalLabel'><b>Cliente:</b> $row[nome_cliente]</h5>
+                                            <button type='button' class='btn-close' data-bs-dismiss='modal' aria-label='Close'></button>
+                                        </div>
+                                        <div class='modal-body'>
+                                            <p class='card-text'><b>Prato:</b> $row[pratos] | <b>Quantidade:</b> $row[quant] | <b>Valor Total:</b> R$ $row[valor_total]</p>
+                                            <p><b>Observação:</b> $row[observacao]</p>
+                                            <p><b>Status:</b> <span class='badge bg-danger'> $row[status]</span></p>
+                                        </div>
+                                        <div class='modal-footer'>
+                                            <button type='button' class='btn btn-secondary' data-bs-dismiss='modal'>Fechar</button>
+                                        </div>
+                                    </div>
+                                </div>
+                                </div>
+                        ";
+                            }
+
+                            ?>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
 
 <style>
     @import url('https://fonts.googleapis.com/css?family=Assistant');

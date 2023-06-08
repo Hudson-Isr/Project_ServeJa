@@ -35,12 +35,6 @@ button{
     border-radius: 30px;
     width: 90%;
   }
-  .left-row{
-    display: flex;
-    flex-direction: column;
-    width: 425px; 
-    justify-content: center; 
-  }
   h2{
     font-size: 30px;
   }
@@ -97,14 +91,6 @@ button{
     color: #ff0000;
     text-decoration: none;
     font-weight: 700;
-  }
-  a:hover{
-    font-weight: 300;
-    color: #ff0000;
-    border-radius: 20px;
-    font-weight: 700;
-    background-color: #FFFFFF;
-    padding: 12px 35px;
   }
 }
 @media only screen and (min-width: 762px) and (max-width: 971px){

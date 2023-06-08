@@ -2,13 +2,83 @@
 //include('PHP/Start.php');
 include "../includes/boostrap.php";
 include "navbar-client.php";
+include "../PHP/Start.php";
+$conn = new mysqli('localhost', 'root', '', 'serveja');
 
 session_start();
 $nome = $_SESSION['nome'];
 
-//FAZER UM IF PARA VERIFICAR SE POSSUI UMA MESA ATRIBUIDA AO USUARIO,
-//CASO NÃO EXIBIR APENAS O MAIN, CASO SIM EXIBIR O CARDÁPIO.
+if (isset($_POST['entrar_mesa'])) {
+    try {
+        $codigo = $_POST["cod_mesa"];
+        $status = "Ocupado";
+
+        #check email before insert
+        $sql = "SELECT codigo FROM mesa where codigo='$codigo'";
+        $stmt = $conn->prepare($sql);
+        $stmt->execute();
+        $stmt->store_result();
+
+        if ($stmt->num_rows == 0) {
+            header("location: ?error=mesa");
+            exit;
+        } else {
+            $mesa = "SELECT * FROM mesa WHERE codigo='$codigo'";
+            $result = $conn->query($mesa);
+            while ($row = $result->fetch_assoc()) 
+            {
+              $id_mesa = $row["id"];  
+            }
+            $query = "UPDATE mesa SET status = '$status', nome_cliente = '$nome' WHERE id=$id_mesa";
+            $query_run = mysqli_query($conn, $query);
+            exit(header("location: client-index-mesa.php?code=$codigo"));
+        }
+    } catch (mysqli_sql_exception $e) {
+        exit($e->getMessage());
+    }
+
+    //Verifica se a query executou corretamente, caso não irá exibir o erro na tela.
+    if (!$query_run) {
+        $error = "Invalid query: " . $conn->error;
+    }
+}
+
 ?>
+
+<?php
+if (isset($_GET['error']) == "mesa") {
+    $erro = "Número de mesa não encontrado!";
+    echo "
+    <div class='container position-absolute top-1 start-50 w-25 alert alert-warning alert-dismissible fade show' role='alert'>
+        <strong>Error: </strong> $erro
+        <button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button>
+    </div>
+    ";
+}
+?>
+
+
+
+<div class='modal fade' id='verModal' tabindex='-1' aria-labelledby='exampleModalLabel' aria-hidden='true'>
+    <div class='modal-dialog modal-dialog-scrollable'>
+        <div class='modal-content'>
+            <div class='modal-header'>
+                <h5 class='modal-title' id='exampleModalLabel'><b>Insira o código da mesa:</b></h5>
+                <button type='button' class='btn-close' data-bs-dismiss='modal' aria-label='Close'></button>
+            </div>
+            <div class='modal-body col-md-5'>
+                <form method='POST'>
+                    <label for="cod_mesa" class="form-label">Código da mesa:</label>
+                    <input required type="text" class="form-control input-sm" name="cod_mesa">
+            </div>
+            <div class='modal-footer'>
+                <button type='submit' name='entrar_mesa' class='btn btn-primary' data-bs-dismiss='modal'>Entrar</button>
+                <button type='button' class='btn btn-secondary' data-bs-dismiss='modal'>Fechar</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
 
 <main role="main" class="mt-3">
 
@@ -21,10 +91,20 @@ $nome = $_SESSION['nome'];
             <p class="t">
             <a href="<?php $caminho?>client-index-mesa1.php" class="btn btn-danger my-2 bg-danger">Escaneie o código QR <i class="bi bi-camera"></i></a>
             <p>ou</p>
-            <a href="#" class="btn btn-secondary my-2">Digite o código da mesa <i class="bi bi-keyboard"></i></a>
+            <a href="#" class="btn btn-secondary my-2" data-bs-toggle='modal' data-bs-target='#verModal' type='button'>Digite o código da mesa <i class="bi bi-keyboard"></i></a>
             </p>
         </div>
-        <img src="/serveja/images/Hamburger-rafiki.png" alt="">
+        <img src="/projeto-serveja/images/Hamburger-rafiki.png" alt="">
     </section>
-    <style>img{width:13%;}</style>
+    <style>
+    img{
+        width:13%;
+    }
+    .start-50 {
+        left: 35% !important;
+    }
+    .w-25 {
+        width: 30%!important;
+    }
+    </style>
 </main>
