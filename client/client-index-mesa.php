@@ -6,6 +6,7 @@ $conn = new mysqli('localhost', 'root', '', 'serveja');
 
 session_start();
 
+$isTrue = 'false';
 $nome = $_SESSION['nome'];
 $id_cliente = $_SESSION['id'];
 $email = $_SESSION['email'];
@@ -13,7 +14,7 @@ $mesa = $_GET['code'];
 $sql = "SELECT num_mesa FROM mesa where codigo='$mesa'";
 $result = $conn->query($sql);
 while ($row = $result->fetch_assoc()) {
-    $num_mesa= $row["num_mesa"];
+    $num_mesa = $row["num_mesa"];
 }
 
 $codigo = $_GET['code'];
@@ -45,7 +46,7 @@ if (isset($_POST['checkout'])) {
     $query = "INSERT INTO pedido (id_cliente, pratos, valor_total, observacao, quant, status, nome_cliente, id_prato, id_mesa) VALUES ('$id_cliente', '$pratos', '$valor_total', '$obs', '$quant', '$status', '$nome', '$id_prato', '$num_mesa')";
 
     $query_run = mysqli_query($conn, $query);
-    exit(header("location: ?success=pedido&code=$mesa&pedido=false"));
+    exit(header("location: ?success=pedido&code=$codigo&pedido=false"));
 
 
     //Verifica se a query executou corretamente, caso não irá exibir o erro na tela.
@@ -73,24 +74,111 @@ if (isset($_POST['checkout'])) {
         <div class="container text-center">
             <h2 class="jumbotron-heading ">Seja bem-vindo, <?php echo $nome; ?>.</h2>
             <h3>ao<h3>
-            <h1 class="logo text-danger">ServeJá</h1>
-            <p class="lead text-dark">Aproveite todos os pratos logo abaixo!</p>
-            <p>Mesa Nº: <b><?php echo $num_mesa ?></b></p>
+                    <h1 class="logo text-danger">ServeJá</h1>
+                    <p class="lead text-dark">Aproveite todos os pratos logo abaixo!</p>
+                    <p>Mesa Nº: <b><?php echo $num_mesa ?></b></p>
         </div>
     </section>
     <div class="album py-5 bg-light">
-        <h2 class="pratos mb-3">Pratos</h2>
+        <div class="d-flex justify-content-between">
+            <h2 class="pratos mb-3">Pratos</h2>
+            <form method='POST'><button class='empty' type='submit'><input type='hidden' name='busca' value=''/><p class='busca'>Limpar Busca</p></button></form>
+        </div>
         <hr>
         <div class="container">
             <div class='row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3'>
                 <?php
-                //Leitura de todas as colunas da tabela
-                $sql = "SELECT * FROM prato";
-                $conn = new mysqli('localhost', 'root', '', 'serveja');
-                $result = $conn->query($sql);
 
-                if (mysqli_num_rows($result) == 0) {
-                    echo "
+
+                if (isset($_POST['busca'])) {
+                    $busca = $_POST['busca'];
+                    $query = "SELECT * FROM prato WHERE nome_prato LIKE '%$busca%'";
+                    $result = $conn->query($query);
+                    if (mysqli_num_rows($result) == 0) {
+                        echo "
+                        <div class='vazio mt-4 container text-center d-flex justify-content-center'>
+                            <div class='row g-3'>
+                                <h3 class='col col-lg-3'>Nenhum prato encontrado...</h3>
+                                <img class='col-md-auto ' src='/projeto-serveja/images/deconstructed-food-amico.svg'>
+                            </div>
+                        </div>
+                        ";
+                    }
+                    while ($row = $result->fetch_assoc()) {
+                        echo "
+                        <div class='col'>
+                            <div class='card shadow-sm'>
+                                <img class='bd-placeholder-img card-img-top' width='100%' height='225' xmlns='http://www.w3.org/2000/svg' src='../upload/$row[image_url]' focusable='false'>
+        
+                                <div class='card-body'>
+                                    <p class='card-text'><b>Nome:</b> $row[nome_prato] | <b>Valor:</b> R$ $row[preco]</p>
+                                    <p class='card-text'><b>Descrição:</b> $row[descricao]</p>
+                                    <div class='d-flex justify-content-between align-items-center'>
+                                        <div class='btn-group'>
+                                            <button type='button' class='btn btn-sm btn-outline-secondary' data-bs-toggle='modal' data-bs-target='#verModal$row[id]''>Ver</button>
+                                            <button type='button' data-bs-toggle='modal' data-bs-target='#comprarModal$row[id]'class='btn btn-sm btn-outline-secondary'>Comprar</button>
+                                        </div>
+                                        <small class='text-muted'>Tempo de preparo: $row[tempo] mins</small>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class='modal fade' id='comprarModal$row[id]' tabindex='-1' aria-labelledby='exampleModalLabel' aria-hidden='true'>
+                            <div class='modal-dialog modal-dialog-scrollable'>
+                                <div class='modal-content'>
+                                    <div class='modal-header'>
+                                        <h5 class='modal-title' id='exampleModalLabel'><b>Prato:</b> $row[nome_prato] | <b>Valor:</b> R$ $row[preco]</h5>
+                                        <button type='button' class='btn-close' data-bs-dismiss='modal' aria-label='Close'></button>
+                                    </div>
+                                    <form method='POST' autocomplete='OFF'>
+                                    <div class='modal-body'>
+                                            <input type='hidden' class='position-absolute' name='prato' value='$row[id]'/>
+                                            <div class='col-sm-2'>
+                                                <label for='quant' class='form-label'><b>Quantidade:</b> </label>
+                                                <input required type='number' min='1' name='quant' class='form-control' value='1'></input>
+                                            </div>
+                                            <label for='obs' class='form-label mt-3'><b>Observação:</b> (Opcional)</label>
+                                            <textarea class='form-control' name='obs' placeholder='Não adicionar maionese, etc...'></textarea>
+                                    </div>
+                                    <div class='modal-footer'>
+                                        <button type='button' class='btn btn-secondary' data-bs-dismiss='modal'>Fechar</button>
+                                        <button type='submit' name='checkout' class='btn btn-primary'>Comprar</button>
+                                    </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+        
+                        <div class='modal fade'  id='verModal$row[id]' tabindex='-1' aria-labelledby='exampleModalLabel' aria-hidden='true'>
+                            <div class='modal-dialog modal-dialog-scrollable'>
+                                <div class='modal-content'>
+                                    <div class='modal-header'>
+                                        <h5 class='modal-title' id='exampleModalLabel'><b>Prato:</b> $row[nome_prato]</h5>
+                                        <button type='button' class='btn-close' data-bs-dismiss='modal' aria-label='Close'></button>
+                                    </div>
+                                    <div class='modal-body'>
+                                        <p class='card-text'><b>Nome:</b> $row[nome_prato] | <b>Valor:</b> R$ $row[preco]</p>
+                                        <p><b>Descrição:</b> $row[descricao]</p>
+                                    </div>
+                                    <div class='modal-footer'>
+                                        <button type='button' class='btn btn-secondary' data-bs-dismiss='modal'>Fechar</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+        
+                        ";
+                    }
+                } else {
+
+                    //Leitura de todas as colunas da tabela
+                    $sql = "SELECT * FROM prato";
+                    $conn = new mysqli('localhost', 'root', '', 'serveja');
+                    $result = $conn->query($sql);
+
+                    if (mysqli_num_rows($result) == 0) {
+                        echo "
                     <div class='vazio mt-4 container text-center d-flex justify-content-center'>
                         <div class='row g-3'>
                             <h3 class='col col-lg-3'>Parece que não tem nenhum prato cadastrado...</h3>
@@ -98,16 +186,16 @@ if (isset($_POST['checkout'])) {
                         </div>
                     </div>
                     ";
-                }
+                    }
 
-                if (!$result) {
-                    die("Query inválida: " . $conn->error);
-                }
+                    if (!$result) {
+                        die("Query inválida: " . $conn->error);
+                    }
 
-                //Disponibilização do resultado da busca na tela
+                    //Disponibilização do resultado da busca na tela
 
-                while ($row = $result->fetch_assoc()) {
-                    echo "
+                    while ($row = $result->fetch_assoc()) {
+                        echo "
                 <div class='col'>
                     <div class='card shadow-sm'>
                         <img class='bd-placeholder-img card-img-top' width='100%' height='225' xmlns='http://www.w3.org/2000/svg' src='../upload/$row[image_url]' focusable='false'>
@@ -171,6 +259,7 @@ if (isset($_POST['checkout'])) {
                 </div>
 
                 ";
+                    }
                 }
                 ?>
             </div>
@@ -180,6 +269,11 @@ if (isset($_POST['checkout'])) {
         <style>
             .start-50 {
                 left: 38% !important;
+            }
+
+            .empty{
+                border: none;
+                background-color: transparent;
             }
 
             textarea {
@@ -202,8 +296,7 @@ if (isset($_POST['checkout'])) {
             }
 
             a {
-                text-decoration: none;
-                color: white;
+                color: black;
             }
 
             .card-text {
@@ -230,6 +323,11 @@ if (isset($_POST['checkout'])) {
 
             form {
                 margin: 0;
+            }
+
+            .busca{
+                margin-right: 5.5rem!important;
+                text-decoration: underline;
             }
         </style>
 </main>

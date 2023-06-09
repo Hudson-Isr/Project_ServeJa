@@ -3,7 +3,7 @@ include "../PHP/Start.php";
 include "../includes/boostrap.php";
 include "navbar-client.php";
 session_start();
-$mesa = $_GET['code'];
+@$mesa = $_GET['code'];
 
 if (isset($_POST['cancelar'])) {
     $conn = new mysqli('localhost', 'root', '', 'serveja');
