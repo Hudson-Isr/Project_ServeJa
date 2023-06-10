@@ -70,6 +70,15 @@ if (isset($_GET['error']) == "user") {
     </div>
     ";
 }
+if (isset($_GET['user']) == "empty") {
+  $erro = "Usúario não autenticado!";
+  echo "
+    <div class='position-absolute top-0 start-50 w-25 alert alert-warning alert-dismissible fade show' role='alert'>
+        <strong>Error: </strong> $erro
+        <button type='button' style='bottom:3px' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button>
+    </div>
+    ";
+}
 ?>
 
 <head>
@@ -104,6 +113,9 @@ if (isset($_GET['error']) == "user") {
       </div>
       <div class="Cadastrar-se">
         <a href="login.php">Já possui uma conta? Entre aqui!</a>
+      </div>
+      <div class="Cadastrar-se">
+        <a style="font-weight: lighter; position: absolute;" href="client/client-index.php">Entrar como visitante</a>
       </div>
     </div>
   </div>

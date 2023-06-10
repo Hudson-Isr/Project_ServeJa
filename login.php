@@ -85,6 +85,9 @@ if (isset($_GET['error']) == "user") {
       <div class="Cadastrar-se">
         <a href="index.php">Ainda não possui uma conta? Cadastrar-se</a>
       </div>
+      <div class="Cadastrar-se">
+        <a style="font-weight: lighter; position: absolute;" href="client/client-index.php">Entrar como visitante</a>
+      </div>
     </div>
   </div>
   </div>

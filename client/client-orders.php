@@ -4,6 +4,9 @@ include "../includes/boostrap.php";
 include "navbar-client.php";
 session_start();
 @$mesa = $_GET['code'];
+if ($_SESSION["nome"] == null){
+    header("location: /serveja/index.php?user=empty");
+}
 
 if (isset($_POST['cancelar'])) {
     $conn = new mysqli('localhost', 'root', '', 'serveja');

@@ -7,6 +7,9 @@ $conn = new mysqli('localhost', 'root', '', 'serveja');
 session_start();
 $isTrue = 'false';
 $nome = $_SESSION['nome'];
+if ($_SESSION["nome"] == null){
+    header("location: /serveja/index.php?user=empty");
+}
 @$id_cliente = $_SESSION['id'];
 @$email = $_SESSION['email'];
 $mesa = $_GET['code'];
