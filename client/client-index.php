@@ -6,7 +6,16 @@ include "../PHP/Start.php";
 $conn = new mysqli('localhost', 'root', '', 'serveja');
 
 session_start();
-$nome = $_SESSION['nome'];
+
+if(isset($_POST['add_name'])){
+    $nome = $_POST['nome'];
+    header("location: /serveja/client/client-index.php?nome=$nome&pedido=false");
+}else if (isset($_GET['nome'])){
+    $nome = $_GET['nome'];
+    $_SESSION['nome'] = $nome;
+} else {
+    $nome = $_SESSION['nome'] ?? null;
+}
 
 if (isset($_POST['entrar_mesa'])) {
     try {
@@ -42,6 +51,8 @@ if (isset($_POST['entrar_mesa'])) {
             }
             $query = "UPDATE mesa SET status = '$status', nome_cliente = '$nome' WHERE id=$id_mesa";
             $query_run = mysqli_query($conn, $query);
+            $id_cliente = get_rand_alphanumeric(8);
+            $_SESSION['id'] = $id_cliente;
             exit(header("location: client-index-mesa.php?code=$codigo&pedido=false"));
         }
     } catch (mysqli_sql_exception $e) {
@@ -75,6 +86,37 @@ if (isset($_GET['erro']) == "ocupado") {
     </div>
     ";
 }
+
+if ($nome == null){
+echo "
+<script src='https://code.jquery.com/jquery-3.2.1.slim.min.js' integrity='sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN' crossorigin='anonymous'></script>
+<link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css' integrity='sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm' crossorigin='anonymous'/>
+<script src='https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js' integrity='sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl' crossorigin='anonymous'></script>
+<script type='text/javascript'>
+    window.onload = function () {
+        OpenBootstrapPopup();
+    };
+    function OpenBootstrapPopup() {
+        $('#staticBackdrop').modal('show');
+    }
+</script>
+<div class='modal fade' id='staticBackdrop' data-bs-backdrop='static' data-bs-keyboard='false' tabindex='-1' aria-labelledby='staticBackdropLabel' aria-hidden='true'>
+    <div class='modal-dialog'>
+        <div class='modal-content'>
+            <div class='modal-body'>
+                <form method='POST' autocomplete='OFF'>
+                <label for='user' class='form-label'>Seu nome</label>
+                <input required onchange='this.value = this.value.trim()' type='text' name='nome' class='form-control' placeholder='Digite seu nome aqui...'>
+            </div>
+            <div class='modal-footer'>
+                <button type='submit' name='add_name' class='btn btn-primary'>Salvar</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+";
+}
 ?>
 <script src="../node_modules/html5-qrcode/html5-qrcode.min.js"></script>
 <div class='modal fade' id='verModal' tabindex='-1' aria-labelledby='exampleModalLabel' aria-hidden='true'>
@@ -106,8 +148,8 @@ if (isset($_GET['erro']) == "ocupado") {
                 <button type='button' class='btn-close' data-bs-dismiss='modal' aria-label='Close'></button>
             </div>
             <div class='modal-body'>
-                    <div id="reader"></div>
-                    <div id="result"></div>
+                <div id="reader"></div>
+                <div id="result"></div>
             </div>
             <div class='modal-footer'>
                 <button type='button' class='btn btn-secondary' data-bs-dismiss='modal'>Fechar</button>
@@ -132,43 +174,48 @@ if (isset($_GET['erro']) == "ocupado") {
         <img src="/projeto-serveja/images/Hamburger-rafiki.png" alt="">
     </section>
     <script>
-    const scanner = new Html5QrcodeScanner('reader', {
-        // Scanner will be initialized in DOM inside element with id of 'reader'
-        qrbox: {
-            width: 250,
-            height: 250,
-        }, // Sets dimensions of scanning box (set relative to reader element width)
-        fps: 20, // Frames per second to attempt a scan
-    });
+        const scanner = new Html5QrcodeScanner('reader', {
+            // Scanner will be initialized in DOM inside element with id of 'reader'
+            qrbox: {
+                width: 250,
+                height: 250,
+            }, // Sets dimensions of scanning box (set relative to reader element width)
+            fps: 20, // Frames per second to attempt a scan
+        });
 
 
-    scanner.render(success, error);
-    // Starts scanner
+        scanner.render(success, error);
+        // Starts scanner
 
-    function success(result) {
+        function success(result) {
 
-        document.getElementById('result').innerHTML = `
+            document.getElementById('result').innerHTML = `
         <h2>Código escaneado com sucesso!</h2>
         <p><a href="${result}">${result}</a></p>
         `;
-        // Prints result as a link inside result element
+        <?php $id_cliente = get_rand_alphanumeric(8);$_SESSION['id'] = $id_cliente; ?>
+            // Prints result as a link inside result element
 
-        scanner.clear();
-        // Clears scanning instance
+            scanner.clear();
+            // Clears scanning instance
 
-        document.getElementById('reader').remove();
-        // Removes reader element from DOM since no longer needed
+            document.getElementById('reader').remove();
+            // Removes reader element from DOM since no longer needed
 
-    }
+        }
 
-    function error(err) {
-        console.error(err);
-        // Prints any errors to the console
-    }
-</script>
+        function error(err) {
+            console.error(err);
+            // Prints any errors to the console
+        }
+    </script>
     <style>
         #reader {
             width: 462px;
+        }
+
+        .navbar {
+            padding: .45rem !important;
         }
 
         img {

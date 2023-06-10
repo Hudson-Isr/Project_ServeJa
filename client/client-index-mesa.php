@@ -5,11 +5,10 @@ include "navbar-client.php";
 $conn = new mysqli('localhost', 'root', '', 'serveja');
 
 session_start();
-
 $isTrue = 'false';
 $nome = $_SESSION['nome'];
-$id_cliente = $_SESSION['id'];
-$email = $_SESSION['email'];
+@$id_cliente = $_SESSION['id'];
+@$email = $_SESSION['email'];
 $mesa = $_GET['code'];
 $sql = "SELECT num_mesa FROM mesa where codigo='$mesa'";
 $result = $conn->query($sql);
@@ -44,7 +43,7 @@ if (isset($_POST['checkout'])) {
 
     $status = "Aguardando";
     $query = "INSERT INTO pedido (id_cliente, pratos, valor_total, observacao, quant, status, nome_cliente, id_prato, id_mesa) VALUES ('$id_cliente', '$pratos', '$valor_total', '$obs', '$quant', '$status', '$nome', '$id_prato', '$num_mesa')";
-
+ 
     $query_run = mysqli_query($conn, $query);
     exit(header("location: ?success=pedido&code=$codigo&pedido=false"));
 

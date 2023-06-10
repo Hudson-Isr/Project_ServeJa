@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 09-Jun-2023 às 19:59
+-- Tempo de geração: 10-Jun-2023 às 14:16
 -- Versão do servidor: 10.4.28-MariaDB
 -- versão do PHP: 8.2.4
 
@@ -43,7 +43,7 @@ CREATE TABLE `mesa` (
 
 CREATE TABLE `pedido` (
   `id` int(11) NOT NULL,
-  `id_cliente` int(11) NOT NULL,
+  `id_cliente` varchar(12) NOT NULL,
   `id_mesa` int(11) NOT NULL,
   `pratos` longtext NOT NULL,
   `observacao` longtext NOT NULL,

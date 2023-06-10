@@ -39,7 +39,7 @@ if (isset($_POST['cancelar'])) {
         </thead>
         <tbody>
             <?php
-            $conn = new mysqli('localhost', 'root', '', 'serveja');
+            $conn = new mysqli('localhost', 'root', '', 'serveja');     
             $id_cliente = $_SESSION['id'];
             $sql = "SELECT * FROM pedido where id_cliente='$id_cliente'";
             $result = $conn->query($sql);

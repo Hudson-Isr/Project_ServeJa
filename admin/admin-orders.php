@@ -68,6 +68,7 @@ if (isset($_POST['cancelar'])) {
                             <tr>
                                 <th>ID Pedido</th>
                                 <th>Nome do Cliente</th>
+                                <th>Mesa</th>
                                 <th>Status</th>
                                 <th>Total</th>
                                 <th>Data</th>
@@ -94,6 +95,7 @@ if (isset($_POST['cancelar'])) {
                                 <tr class='cell-1' style='border: solid; border-width: 1px 0;'>
                                     <td>$row[id]</td>
                                     <td>$row[nome_cliente]</td>
+                                    <td><b>$row[id_mesa]</b></td>
                                     <td><span class='badge bg-warning'>$row[status]</span></td>
                                     <td>R$ $row[valor_total]</td>
                                     <td>$data</td>
@@ -148,6 +150,7 @@ if (isset($_POST['cancelar'])) {
                             <tr>
                                 <th>ID Pedido</th>
                                 <th>Nome do Cliente</th>
+                                <th>Mesa</th>
                                 <th>Status</th>
                                 <th>Total</th>
                                 <th>Data</th>
@@ -174,6 +177,7 @@ if (isset($_POST['cancelar'])) {
                                 <tr class='cell-1' style='border: solid; border-width: 1px 0;'>
                                     <td>$row[id]</td>
                                     <td>$row[nome_cliente]</td>
+                                    <td><b>$row[id_mesa]</b></td>
                                     <td><span class='badge bg-success'>$row[status]</span></td>
                                     <td>R$ $row[valor_total]</td>
                                     <td>$data</td>
@@ -226,6 +230,7 @@ if (isset($_POST['cancelar'])) {
                             <tr>
                                 <th>ID Pedido</th>
                                 <th>Nome do Cliente</th>
+                                <th>Mesa</th>
                                 <th>Status</th>
                                 <th>Total</th>
                                 <th>Data</th>
@@ -252,6 +257,7 @@ if (isset($_POST['cancelar'])) {
                                 <tr class='cell-1' style='border: solid; border-width: 1px 0;'>
                                     <td>$row[id]</td>
                                     <td>$row[nome_cliente]</td>
+                                    <td><b>$row[id_mesa]</b></td>
                                     <td><span class='badge bg-primary'>$row[status]</span></td>
                                     <td>R$ $row[valor_total]</td>
                                     <td>$data</td>
@@ -299,6 +305,7 @@ if (isset($_POST['cancelar'])) {
                             <tr>
                                 <th>ID Pedido</th>
                                 <th>Nome do Cliente</th>
+                                <th>Mesa</th>
                                 <th>Status</th>
                                 <th>Total</th>
                                 <th>Data</th>
@@ -325,6 +332,7 @@ if (isset($_POST['cancelar'])) {
                                 <tr class='cell-1' style='border: solid; border-width: 1px 0;'>
                                     <td>$row[id]</td>
                                     <td>$row[nome_cliente]</td>
+                                    <td><b>$row[id_mesa]</b></td>
                                     <td><span class='badge bg-danger'>$row[status]</span></td>
                                     <td>R$ $row[valor_total]</td>
                                     <td>$data</td>
