@@ -183,7 +183,7 @@ if (isset($_POST['checkout'])) {
                         echo "
                     <div class='vazio mt-4 container text-center d-flex justify-content-center'>
                         <div class='row g-3'>
-                            <h3 class='col col-lg-3'>Parece que não tem nenhum prato cadastrado...</h3>
+                            <h3 class='col col-lg-3'>Nenhum prato encontrado...</h3>
                             <img class='col-md-auto ' src='/projeto-serveja/images/deconstructed-food-amico.svg'>
                         </div>
                     </div>
