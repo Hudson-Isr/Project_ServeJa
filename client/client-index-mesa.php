@@ -5,7 +5,6 @@ include "navbar-client.php";
 $conn = new mysqli('localhost', 'root', '', 'serveja');
 
 session_start();
-$isTrue = 'false';
 $nome = $_SESSION['nome'];
 if ($_SESSION["nome"] == null){
     header("location: /serveja/index.php?user=empty");
@@ -25,9 +24,12 @@ $mesa = "SELECT * FROM mesa WHERE codigo='$codigo'";
 $result = $conn->query($mesa);
 while ($row = $result->fetch_assoc()) {
     $id_mesa = $row["id"];
+    $state = $row["status"];
 }
 $query = "UPDATE mesa SET status = '$stat', nome_cliente = '$nome' WHERE id=$id_mesa";
 $query_run = mysqli_query($conn, $query);
+
+
 
 if (isset($_POST['checkout'])) {
     $id_prato = $_POST["prato"];
@@ -183,7 +185,7 @@ if (isset($_POST['checkout'])) {
                         echo "
                     <div class='vazio mt-4 container text-center d-flex justify-content-center'>
                         <div class='row g-3'>
-                            <h3 class='col col-lg-3'>Nenhum prato encontrado...</h3>
+                            <h3 class='col col-lg-3'>Parece que não tem nenhum prato encontrado...</h3>
                             <img class='col-md-auto ' src='/projeto-serveja/images/deconstructed-food-amico.svg'>
                         </div>
                     </div>
