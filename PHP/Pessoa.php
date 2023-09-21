@@ -24,12 +24,6 @@ class Pessoa{
     public final function setSenha($senha){
         $this->senha = $senha;
     }
-    public function getCPF(){
-        return $this->cpf;
-    }
-    public function setCPF($cpf){
-        $this->cpf = $cpf;
-    }
 }
 
 //Cliente

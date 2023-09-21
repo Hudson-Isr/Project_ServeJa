@@ -3,12 +3,11 @@
 class PessoaDAO {
 
     public function create (Pessoa $Pessoa) {
-        $sql = 'INSERT INTO pessoa (nome, email, senha, CPF) VALUES (?,?,?,?)';
+        $sql = 'INSERT INTO pessoa (nome, email, senha) VALUES (?,?,?)';
         $stmt = Conexao::getConn()->prepare($sql);
         $stmt->bindValue(1, $Pessoa->getNome());
         $stmt->bindValue(2, $Pessoa->getEmail());
         $stmt->bindValue(3, $Pessoa->getSenha());
-        $stmt->bindValue(4, $Pessoa->getCPF());
 
         $stmt->execute();
     }
@@ -28,12 +27,11 @@ class PessoaDAO {
     }
 
     public function update(Pessoa $Pessoa) {
-        $sql = 'UPDATE pessoa SET nome = ?, email = ?, senha = ?, CPF =  ? WHERE id = ?';
+        $sql = 'UPDATE pessoa SET nome = ?, email = ?, senha = ? WHERE id = ?';
         $stmt = Conexao::getConn()->prepare($sql);
         $stmt->bindValue(1, $Pessoa->getNome());
         $stmt->bindValue(2, $Pessoa->getEmail());
         $stmt->bindValue(3, $Pessoa->getSenha());
-        $stmt->bindValue(4, $Pessoa->getCPF());
 
         $stmt->execute();
     }
