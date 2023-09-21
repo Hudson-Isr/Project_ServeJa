@@ -5,30 +5,30 @@
   font-family: "Roboto", sans-serif;
 }
 /*Inicio do header*/
-header{
-  background-color: #F7B267;
+header {
+  background-image: linear-gradient(to bottom, #ffa436, #ff6600);
 }
-header ul{
+header ul {
   display: flex;
   align-items: center;
   list-style-type: none;
   justify-content: space-around;
   height: 100px;
 }
-header ul li a{
+header ul li a {
   text-decoration: none;
   font-size: 25px;
-  color: #FFFFFF;
+  color: #ffffff;
   font-weight: 500;
 }
-header ul li a:hover{
+header ul li a:hover {
   color: #000;
 }
-span{
+span {
   font-size: 20px;
   color: black;
 }
-span:hover{
+span:hover {
   color: white;
 }
 .btn-ver {
@@ -39,7 +39,7 @@ span:hover{
   border-radius: 5px;
   cursor: pointer;
 }
-.btn-ver-mais{
+.btn-ver-mais {
   background-color: #f9f9f9;
   color: white;
   border: none;
@@ -48,20 +48,20 @@ span:hover{
   cursor: pointer;
   position: relative;
 }
-.btn-ver-mais:hover{
-  background-color: #F27059;
+.btn-ver-mais:hover {
+  background-color: #f27059;
 }
-.btn-ver-mais:focus{
-  background-color: #F27059;
+.btn-ver-mais:focus {
+  background-color: #f27059;
   outline: none;
 }
 .btn-ver-mais:focus .menubar {
   display: block;
 }
-.btn-ver-mais:focus-within .menubar{
+.btn-ver-mais:focus-within .menubar {
   display: block;
 }
-.menubar{
+.menubar {
   position: absolute;
   top: 100%;
   left: 20%;
@@ -72,44 +72,43 @@ span:hover{
   border-radius: 5px;
   height: max-content;
   margin-top: 10px;
-  
 }
-.menubar li{
+.menubar li {
   padding: 5px 0;
   cursor: pointer;
 }
-.menubar a{
+.menubar a {
   font-size: 20px;
   color: #590202;
   text-decoration: none;
 }
-.menubar a{
+.menubar a {
   display: block;
   text-decoration: none;
 }
-.menubar a:hover{
+.menubar a:hover {
   text-decoration: none;
 }
-.pesquisa input{
+.pesquisa input {
   padding: 10px 30px;
   font-size: 1.1rem;
   border-radius: 10px;
   border: none;
   margin: 10px;
 }
-.pesquisa button{
+.pesquisa button {
   background-color: #f9f9f9;
   color: #000;
   padding: 12px;
   border-radius: 8px;
   border: none;
 }
-.pesquisa button:hover{
-  background-color: #F27059;
+.pesquisa button:hover {
+  background-color: #f27059;
   color: white;
 }
 .menu {
-  background-color: #fc6431;
+  background-image: linear-gradient(to bottom, #ffa436, #ff6600);
   padding: 8px;
   width: 80px;
   border-radius: 10px;
@@ -146,13 +145,13 @@ span:hover{
   text-decoration: none;
 }
 .btn-codes button:hover {
-  background-color: #F25C54;
+  background-color: #f25c54;
 }
 /*Fim do Seja Bem-vindo*/
 
 /*Categoria*/
 .album {
-  background-color: #F7B267;
+  background-color: #f7b267;
   display: flex;
   align-items: center;
   justify-content: space-around;
@@ -172,13 +171,13 @@ span:hover{
   text-decoration: none;
   text-align: center;
 }
-.tes{
+.tes {
   margin: 0 70px;
 }
 /*Fim categoria*/
 
 /*Pedidos*/
-.card{
+.card {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   margin: 0 50px;
@@ -223,7 +222,7 @@ span:hover{
   align-items: center;
 }
 .carrinho a {
-  color: #FFFFFF;
+  color: #ffffff;
   text-decoration: none;
 }
 .carrinho button {
